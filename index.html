@@ -1,0 +1,2610 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOBA Localization Trainer — Dota 2 × Dragon's Blood</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+    --gold: #d4af37;
+    --gold-dim: #9a7d20;
+    --crimson: #b22222;
+    --crimson-light: #e03333;
+    --bg: #080808;
+    --surface: #121212;
+    --surface2: #1c1c1c;
+    --surface3: #242424;
+    --border: #2e2e2e;
+    --border-light: #3d3d3d;
+    --text: #ddd8c8;
+    --text-muted: #888070;
+    --text-dim: #555048;
+    --green: #2d7a3a;
+    --green-light: #3fa852;
+    --red-err: #8a2020;
+    --red-err-light: #c43030;
+    --radius: 3px;
+    --transition: 0.22s ease;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+}
+
+.app-header {
+    background: linear-gradient(180deg, #120808 0%, var(--surface) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+.app-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent 0%, var(--crimson) 20%, var(--gold) 50%, var(--crimson) 80%, transparent 100%);
+}
+.header-title { display: flex; flex-direction: column; gap: 2px; }
+.header-title h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.2;
+}
+.header-title .sub {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+.header-controls { display: flex; align-items: center; gap: 12px; }
+
+.return-home-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: var(--radius);
+    padding: 6px 12px;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+.return-home-btn:hover {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+    background: rgba(212, 175, 55, 0.08);
+}
+
+
+.mode-switch {
+    display: flex;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+.mode-btn {
+    padding: 6px 14px;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--text-muted);
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    transition: var(--transition);
+}
+.mode-btn.active { background: var(--crimson); color: #fff; }
+.mode-btn:not(.active):hover { color: var(--text); background: var(--surface3); }
+
+.score-badge {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 5px 10px;
+    font-size: 0.72rem;
+}
+.score-badge.visible { display: flex; }
+.score-num { font-weight: 500; color: var(--gold); font-size: 0.85rem; }
+.score-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+.controls-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.controls-left { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.controls-right { display: flex; align-items: center; gap: 10px; }
+
+.ctrl-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    white-space: nowrap;
+}
+select {
+    background: var(--surface2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 6px 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+    outline: none;
+    transition: border-color var(--transition);
+}
+select:hover, select:focus { border-color: var(--gold-dim); }
+
+.line-nav { display: flex; align-items: center; gap: 8px; }
+.nav-btn {
+    background: var(--surface2);
+    color: var(--gold);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+.nav-btn:hover:not(:disabled) { background: var(--gold); color: #000; border-color: var(--gold); }
+.nav-btn:disabled { opacity: 0.25; cursor: not-allowed; pointer-events: none; }
+.line-counter {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    min-width: 42px;
+    text-align: center;
+    font-weight: 500;
+}
+.line-dots { display: flex; gap: 5px; align-items: center; }
+.dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border-light);
+    cursor: pointer;
+    transition: var(--transition);
+}
+.dot.active { background: var(--gold); transform: scale(1.3); }
+.dot:hover:not(.active) { background: var(--text-muted); }
+
+.kbd-hint {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+}
+kbd {
+    display: inline-block;
+    background: var(--surface3);
+    border: 1px solid var(--border-light);
+    border-radius: 2px;
+    padding: 1px 4px;
+    font-family: monospace;
+    font-size: 0.65rem;
+}
+
+.workspace {
+    display: grid;
+    grid-template-columns: 1fr 52px 1fr;
+    gap: 0;
+    padding: 28px 32px 0;
+    align-items: stretch;
+}
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    transition: border-color 0.3s, box-shadow 0.3s, opacity 0.3s;
+    position: relative;
+    min-height: 200px;
+}
+.card.game-card { border-top: 2px solid var(--crimson); }
+.card.series-card { border-top: 2px solid var(--gold-dim); }
+.card.card-updating { opacity: 0.5; }
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+.avatar {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 15%;
+    border: 2px solid var(--border-light);
+    background: var(--surface3);
+    flex-shrink: 0;
+    display: block;
+}
+.card-id { display: flex; flex-direction: column; gap: 2px; }
+.card-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: 1px;
+}
+.card-type {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+}
+.game-card .card-type { color: #a04040; }
+.series-card .card-type { color: var(--gold-dim); }
+
+.quote {
+    font-family: 'EB Garamond', 'Georgia', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.55;
+    color: var(--text);
+    margin-bottom: 14px;
+    min-height: 60px;
+}
+
+.context-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+.context-text {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.card-translation-block {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+}
+.translation-row {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.translation-text {
+    font-family: 'EB Garamond', 'Georgia', serif;
+    font-size: 1rem;
+    color: #f0e8d0;
+    line-height: 1.5;
+    text-align: justify;
+    width: 100%;
+}
+.method-tag {
+    background: rgba(178, 34, 34, 0.18);
+    color: #ffb0b0;
+    border: 1px solid rgba(178, 34, 34, 0.4);
+    border-radius: var(--radius);
+    padding: 3px 8px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    cursor: help;
+    align-self: flex-start;
+}
+.method-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-self: flex-start;
+}
+.series-card .method-tag {
+    background: rgba(154, 125, 32, 0.18);
+    color: #ffd080;
+    border-color: rgba(154, 125, 32, 0.4);
+}
+
+.analysis-wrap {
+    grid-column: 1 / -1;
+    margin-top: 20px;
+}
+
+.result-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--crimson);
+    padding: 20px 24px;
+    transition: opacity 0.3s;
+}
+
+.result-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+.result-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold-dim);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+.result-translation {
+    font-family: 'EB Garamond', 'Georgia', serif;
+    font-size: 1.15rem;
+    color: #f0e8d0;
+    line-height: 1.5;
+}
+.copy-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: var(--radius);
+    padding: 4px 10px;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex; align-items: center; gap: 5px;
+    font-family: 'Inter', sans-serif;
+    white-space: nowrap;
+}
+.copy-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+.copy-btn.copied { border-color: var(--green); color: var(--green-light); }
+
+.result-rationale {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+}
+
+.practice-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    border-left: 3px solid var(--gold-dim);
+    padding: 20px 24px;
+    display: none;
+}
+.practice-panel.visible { display: block; }
+
+.practice-instruction {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold-dim);
+    margin-bottom: 14px;
+    font-weight: 500;
+}
+.method-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+.method-option-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: var(--radius);
+    padding: 7px 14px;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+}
+.method-option-btn:hover:not(:disabled) { border-color: var(--gold-dim); color: var(--text); }
+.method-option-btn.correct { background: rgba(45, 122, 58, 0.25); border-color: var(--green-light); color: #7edf93; }
+.method-option-btn.wrong { background: rgba(138, 32, 32, 0.25); border-color: var(--red-err-light); color: #e07070; }
+.method-option-btn.reveal-correct { background: rgba(45, 122, 58, 0.15); border-color: var(--green); color: #7edf93; border-style: dashed; }
+.method-option-btn:disabled { cursor: not-allowed; opacity: 0.6; }
+
+.practice-feedback {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    background: var(--surface2);
+    line-height: 1.5;
+    display: none;
+}
+.practice-feedback.visible { display: block; }
+.practice-feedback.ok { border-left: 2px solid var(--green-light); color: #9ee0ab; }
+.practice-feedback.fail { border-left: 2px solid var(--red-err-light); color: #e08888; }
+
+.practice-actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.practice-skip-btn, .practice-reveal-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: var(--radius);
+    padding: 5px 12px;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.practice-skip-btn:hover { color: var(--text); border-color: var(--border-light); }
+.practice-reveal-btn { color: var(--gold-dim); border-color: var(--gold-dim); }
+.practice-reveal-btn:hover { color: var(--gold); background: rgba(212, 175, 55, 0.08); }
+
+.card-quiz {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: none;
+}
+.card-quiz.visible { display: block; }
+.card-quiz-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+.multi-answer-note {
+    display: none;
+    margin: 0 0 10px;
+    padding: 7px 10px;
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    border-left: 3px solid var(--gold-dim);
+    border-radius: var(--radius);
+    background: rgba(212, 175, 55, 0.08);
+    color: #d8c17a;
+    font-size: 0.72rem;
+    line-height: 1.45;
+}
+.multi-answer-note.visible { display: block; }
+.card-method-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+.card-method-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: var(--radius);
+    padding: 5px 11px;
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+}
+.card-method-btn:hover:not(:disabled) { border-color: var(--gold-dim); color: var(--text); }
+.card-method-btn.selected {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(212,175,55,0.12);
+}
+.card-method-btn.correct { background: rgba(45,122,58,0.25); border-color: var(--green-light); color: #7edf93; }
+.card-method-btn.wrong { background: rgba(138,32,32,0.25); border-color: var(--red-err-light); color: #e07070; }
+.card-method-btn.reveal-correct { background: rgba(45,122,58,0.15); border-color: var(--green); color: #7edf93; border-style: dashed; }
+.card-method-btn:disabled { cursor: not-allowed; opacity: 0.6; }
+.card-quiz-feedback {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    padding: 8px 12px;
+    border-radius: var(--radius);
+    background: var(--surface2);
+    line-height: 1.5;
+    display: none;
+    margin-bottom: 8px;
+}
+.card-quiz-feedback.visible { display: block; }
+.card-quiz-feedback.ok { border-left: 2px solid var(--green-light); color: #9ee0ab; }
+.card-quiz-feedback.fail { border-left: 2px solid var(--red-err-light); color: #e08888; }
+.card-quiz-submit {
+    background: rgba(212,175,55,0.12);
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    border-radius: var(--radius);
+    padding: 4px 12px;
+    font-size: 0.68rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 8px;
+}
+.card-quiz-submit:hover:not(:disabled) { background: rgba(212,175,55,0.2); border-color: var(--gold); }
+.card-quiz-submit:disabled { opacity: 0.35; cursor: not-allowed; }
+.card-quiz-reveal {
+    background: transparent;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold-dim);
+    border-radius: var(--radius);
+    padding: 4px 10px;
+    font-size: 0.68rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.card-quiz-reveal:hover { color: var(--gold); background: rgba(212,175,55,0.08); }
+
+.workspace-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+}
+.arrow-icon { font-size: 1.4rem; color: var(--border-light); }
+
+.glossary-wrap {
+    padding: 0 32px 16px;
+    margin-top: 16px;
+}
+.glossary-toggle {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+    display: flex; align-items: center; gap: 6px;
+}
+.glossary-toggle:hover { border-color: var(--gold-dim); color: var(--gold); }
+.glossary-toggle .toggle-icon { transition: transform 0.25s; font-style: normal; }
+.glossary-toggle.open .toggle-icon { transform: rotate(90deg); }
+
+.glossary-grid {
+    display: none;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+}
+.glossary-grid.visible { display: grid; }
+.glossary-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+}
+.gcard-name { font-size: 0.78rem; font-weight: 500; color: var(--gold); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+.gcard-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+.gcard-example { font-size: 0.72rem; color: var(--text-dim); font-style: italic; margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--border); }
+
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    display: none;
+}
+
+.app-footer {
+    padding: 12px 32px 24px;
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-align: center;
+    line-height: 1.7;
+    border-top: 1px solid var(--border);
+    margin-top: 24px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: var(--surface3);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 8px 16px;
+    font-size: 0.78rem;
+    color: var(--text);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.25s, transform 0.25s;
+    pointer-events: none;
+    z-index: 999;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+
+.ctrl-divider { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
+
+@media (max-width: 700px) {
+    .app-header { flex-direction: column; align-items: flex-start; gap: 10px; padding: 14px 16px; }
+    .controls-bar { padding: 10px 16px; }
+    .workspace { grid-template-columns: 1fr; padding: 16px 16px 0; }
+    .workspace-arrow { padding-top: 0; transform: rotate(90deg); }
+    .glossary-wrap { padding: 0 16px 16px; }
+    .app-footer { padding: 12px 16px 20px; }
+    .result-top { flex-direction: column; }
+}
+
+
+/* ── PREVIEW / START PAGE ── */
+.preview-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 20% 10%, rgba(178, 34, 34, 0.24), transparent 32%),
+        radial-gradient(circle at 80% 0%, rgba(212, 175, 55, 0.14), transparent 34%),
+        linear-gradient(180deg, #080808 0%, #111 52%, #080808 100%);
+    padding: 34px 32px 42px;
+}
+.preview-hero {
+    max-width: 1180px;
+    margin: 0 auto 24px;
+    background: rgba(18, 18, 18, 0.88);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold-dim);
+    border-radius: var(--radius);
+    padding: 34px;
+    position: relative;
+    overflow: hidden;
+}
+.preview-hero::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--crimson), var(--gold), transparent);
+}
+.preview-kicker {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold-dim);
+    margin-bottom: 10px;
+}
+.preview-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.55rem, 4vw, 3.1rem);
+    line-height: 1.1;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+}
+.preview-description {
+    max-width: 920px;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+.preview-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.preview-btn {
+    background: var(--crimson);
+    border: 1px solid var(--crimson-light);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 10px 18px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+}
+.preview-btn:hover {
+    background: var(--crimson-light);
+    border-color: var(--gold-dim);
+}
+.preview-btn.secondary {
+    background: transparent;
+    color: var(--gold);
+    border-color: var(--gold-dim);
+}
+.preview-btn.secondary:hover {
+    background: rgba(212, 175, 55, 0.08);
+}
+.preview-section {
+    max-width: 1180px;
+    margin: 0 auto 18px;
+    background: rgba(18, 18, 18, 0.74);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+}
+.preview-section-title {
+    font-family: 'Cinzel', serif;
+    color: var(--text);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.preview-section-text {
+    color: var(--text-muted);
+    line-height: 1.65;
+    font-size: 0.9rem;
+}
+.preview-grid {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+.preview-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--crimson);
+    border-radius: var(--radius);
+    padding: 18px;
+    min-height: 100%;
+}
+.preview-card:nth-child(2) { border-top-color: var(--gold-dim); }
+.preview-card:nth-child(3) { border-top-color: var(--crimson-light); }
+.preview-character-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+.preview-avatar-pair {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    flex-shrink: 0;
+}
+.preview-avatar-pair img {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-light);
+    background: var(--surface3);
+}
+.preview-avatar-pair img + img {
+    margin-left: -12px;
+    border-color: var(--gold-dim);
+}
+.preview-character-title {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 0.88rem;
+    letter-spacing: 0.8px;
+    line-height: 1.35;
+}
+.preview-character-subtitle {
+    color: var(--text-dim);
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 3px;
+}
+.preview-lore-block {
+    margin-bottom: 12px;
+}
+.preview-lore-label {
+    color: var(--gold-dim);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 4px;
+}
+.preview-lore-text {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.55;
+}
+.preview-mini-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    margin-top: 12px;
+}
+.preview-card-action {
+    margin-top: 14px;
+}
+.preview-note {
+    max-width: 1180px;
+    margin: 18px auto 0;
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    line-height: 1.6;
+    text-align: center;
+}
+
+
+/* ── CHARACTER PREVIEW SCREEN FROM BUTTON ── */
+.character-preview-page {
+    display: none;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 16% 6%, rgba(178, 34, 34, 0.25), transparent 34%),
+        radial-gradient(circle at 84% 2%, rgba(212, 175, 55, 0.15), transparent 34%),
+        linear-gradient(180deg, #080808 0%, #111 52%, #080808 100%);
+    padding: 34px 32px 42px;
+}
+.character-preview-shell {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+.character-preview-head {
+    background: rgba(18, 18, 18, 0.88);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold-dim);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+}
+.character-preview-title {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: clamp(1.15rem, 2.5vw, 2rem);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+.character-preview-text {
+    color: var(--text-muted);
+    line-height: 1.65;
+    font-size: 0.88rem;
+    max-width: 820px;
+}
+.character-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.character-tab-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: var(--radius);
+    padding: 8px 13px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.character-tab-btn:hover {
+    color: var(--gold);
+    border-color: var(--gold-dim);
+}
+.character-tab-btn.active {
+    background: rgba(178, 34, 34, 0.28);
+    border-color: var(--crimson-light);
+    color: #fff;
+}
+.character-panel {
+    display: none;
+    background: rgba(18, 18, 18, 0.78);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+}
+.character-panel.active {
+    display: block;
+}
+.character-panel-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 14px;
+}
+.character-panel-name {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+.character-panel-subtitle {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    line-height: 1.55;
+}
+.character-panel-mark {
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 4px 9px;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+.character-dual-windows {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+.character-big-window {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+}
+.character-big-window.game-window {
+    border-top: 2px solid var(--crimson);
+}
+.character-big-window.series-window {
+    border-top: 2px solid var(--gold-dim);
+}
+.character-window-label {
+    font-size: 0.62rem;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    letter-spacing: 1.4px;
+    margin-bottom: 10px;
+}
+.character-big-image {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    object-position: center 15%;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-light);
+    background: var(--surface3);
+    margin-bottom: 14px;
+}
+.character-big-window h4 {
+    font-family: 'Cinzel', serif;
+    color: var(--text);
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+.character-big-window p {
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+.character-epic-quote {
+    margin-top: 18px;
+    background: rgba(8, 8, 8, 0.52);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold-dim);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    font-family: 'EB Garamond', 'Georgia', serif;
+    color: #f0e8d0;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    font-style: italic;
+    text-align: center;
+}
+@media (max-width: 850px) {
+    .character-preview-head { flex-direction: column; }
+    .character-dual-windows { grid-template-columns: 1fr; }
+    .character-big-window { min-height: auto; }
+}
+@media (max-width: 700px) {
+    .character-preview-page { padding: 18px 16px 28px; }
+    .character-preview-head { padding: 18px; }
+    .character-panel { padding: 16px; }
+    .character-big-image { height: 220px; }
+}
+
+
+.practice-next-wrap {
+    display: none;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+.practice-next-wrap .test-next-btn {
+    border-color: var(--gold-dim);
+    color: var(--gold-dim);
+    min-width: 190px;
+    justify-content: center;
+}
+.practice-next-wrap .test-answer-btn {
+    border-color: var(--gold-dim);
+    color: var(--gold);
+    min-width: 140px;
+    justify-content: center;
+    background: rgba(212, 175, 55, 0.10);
+}
+.practice-next-wrap .test-answer-btn:hover:not(:disabled) {
+    color: #fff;
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.22);
+}
+.practice-next-wrap .test-answer-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    color: var(--text-dim);
+    border-color: var(--border);
+    background: transparent;
+}
+.practice-next-wrap .test-next-btn:hover:not(:disabled) {
+    color: var(--gold);
+    background: rgba(212, 175, 55, 0.08);
+}
+.practice-next-wrap .test-next-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    color: var(--text-dim);
+    border-color: var(--border);
+    background: transparent;
+}
+.practice-next-wrap .test-next-btn.finish {
+    background: rgba(178, 34, 34, 0.22);
+    border-color: var(--crimson-light);
+    color: #ffd0d0;
+}
+.practice-next-wrap .test-next-btn.finish:hover {
+    background: var(--crimson);
+    color: #fff;
+}
+.test-result-screen {
+    display: none;
+    min-height: 100vh;
+    padding: 32px;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle at 50% 20%, rgba(178, 34, 34, 0.16), transparent 42%),
+        radial-gradient(circle at 50% 80%, rgba(212, 175, 55, 0.10), transparent 45%),
+        var(--bg);
+}
+.test-result-card {
+    width: min(620px, 100%);
+    background: linear-gradient(180deg, rgba(28, 28, 28, 0.98), rgba(18, 18, 18, 0.98));
+    border: 1px solid var(--border-light);
+    border-top: 2px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 34px 28px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+.test-result-kicker {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: var(--gold-dim);
+    margin-bottom: 10px;
+}
+.test-result-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.35rem;
+    color: var(--gold);
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+.test-result-score {
+    font-family: 'EB Garamond', 'Georgia', serif;
+    font-size: 1.65rem;
+    color: #f0e8d0;
+    line-height: 1.35;
+    margin-bottom: 10px;
+}
+.test-result-details {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 22px;
+}
+.test-result-card .preview-btn {
+    margin: 0 auto;
+}
+
+.project-signature {
+    margin-top: 24px;
+    padding: 14px 18px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim);
+    font-size: 0.65rem;
+    line-height: 1.7;
+    text-align: center;
+}
+.preview-page .project-signature,
+.character-preview-page .project-signature {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.test-result-card .project-signature {
+    margin-top: 18px;
+    margin-bottom: 18px;
+    padding: 12px 0 0;
+}
+
+.trainer-page {
+    display: none;
+}
+@media (max-width: 950px) {
+    .preview-grid { grid-template-columns: 1fr; }
+    .preview-mini-columns { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+    .preview-page { padding: 18px 16px 28px; }
+    .preview-hero { padding: 24px 18px; }
+    .preview-section { padding: 18px; }
+}
+
+</style>
+</head>
+<body>
+<section class="preview-page" id="previewPage">
+    <div class="preview-hero">
+        <div class="preview-kicker">Cross-media localization preview</div>
+        <h1 class="preview-title">Dota 2 × Dragon’s Blood</h1>
+        <p class="preview-description">
+            Этот тренажёр показывает, как персонажи Dota 2 меняются при переходе из игрового формата в сериал Dragon’s Blood. В игре реплики чаще выполняют боевую, атмосферную и характерологическую функцию, а в сериале они раскрывают лор, внутренний конфликт и психологическую мотивацию персонажей.
+        </p>
+        <div class="preview-actions">
+            <button class="preview-btn" onclick="startTrainer('all')">Перейти к тренажеру</button>
+            <button class="preview-btn secondary" onclick="openCharacterPreview()">Посмотреть персонажей</button>
+        </div>
+    </div>
+
+    <div class="preview-section">
+        <h2 class="preview-section-title">Кроссмедийная адаптация</h2>
+        <p class="preview-section-text">
+            В Dota 2 персонажи представлены через короткие реплики, боевые фразы и игровые ситуации. В Dragon’s Blood те же образы разворачиваются в линейный сюжет: герои получают личную историю, драматические мотивы и более сложные отношения с миром. Поэтому при переводе важно учитывать не только прямое значение фразы, но и изменение функции персонажа в новом медиаформате.
+        </p>
+    </div>
+
+    <div class="preview-grid" id="previewCharacters">
+        <article class="preview-card">
+            <div class="preview-character-head">
+                <div class="preview-avatar-pair">
+                    <img src="images/game/dragon_knight.jpeg" alt="Dragon Knight" onerror="this.src=makeAvatar('davion','game')">
+                    <img src="images/series/davion.jpeg" alt="Davion" onerror="this.src=makeAvatar('davion','series')">
+                </div>
+                <div>
+                    <div class="preview-character-title">Davion / Dragon Knight</div>
+                    <div class="preview-character-subtitle">Warrior identity and dragon power</div>
+                </div>
+            </div>
+            <div class="preview-lore-block">
+                <div class="preview-lore-label">Лор персонажа</div>
+                <div class="preview-lore-text">В игре Dragon Knight выступает как архетипический воин, связанный с драконьей силой, честью и боевым пафосом. В сериале Davion раскрывается через двойственную идентичность и внутренний конфликт.</div>
+            </div>
+            <div class="preview-mini-columns">
+                <div>
+                    <div class="preview-lore-label">Dota 2</div>
+                    <div class="preview-lore-text">Dragon Knight представлен как эпический воин, связанный с драконьей силой, честью, боевым пафосом и образом легендарного клинка.</div>
+                </div>
+                <div>
+                    <div class="preview-lore-label">Dragon Blood</div>
+                    <div class="preview-lore-text">Davion раскрывается как герой с внутренним конфликтом, двойственной идентичностью и личным переживанием связи с драконом.</div>
+                </div>
+            </div>
+            <div class="preview-card-action">
+            </div>
+        </article>
+
+        <article class="preview-card">
+            <div class="preview-character-head">
+                <div class="preview-avatar-pair">
+                    <img src="images/game/invoker.jpg" alt="Invoker" onerror="this.src=makeAvatar('invoker','game')">
+                    <img src="images/series/carl.jpg" alt="Carl" onerror="this.src=makeAvatar('invoker','series')">
+                </div>
+                <div>
+                    <div class="preview-character-title">Invoker / Carl</div>
+                    <div class="preview-character-subtitle">Knowledge, power and tragedy</div>
+                </div>
+            </div>
+            <div class="preview-lore-block">
+                <div class="preview-lore-label">Лор персонажа</div>
+                <div class="preview-lore-text">В игре Invoker подчёркивает интеллектуальное превосходство, магическую силу и нарциссизм. В сериале Carl становится трагическим героем, связанным с утратой, памятью и попыткой изменить реальность.</div>
+            </div>
+            <div class="preview-mini-columns">
+                <div>
+                    <div class="preview-lore-label">Dota 2</div>
+                    <div class="preview-lore-text">Invoker показан как самоуверенный архимаг, подчёркивающий интеллектуальное превосходство, магическую силу и контроль над знанием.</div>
+                </div>
+                <div>
+                    <div class="preview-lore-label">Dragon Blood</div>
+                    <div class="preview-lore-text">Carl становится трагическим персонажем, связанным с утратой, памятью, любовью и попыткой изменить устройство реальности.</div>
+                </div>
+            </div>
+            <div class="preview-card-action">
+            </div>
+        </article>
+
+        <article class="preview-card">
+            <div class="preview-character-head">
+                <div class="preview-avatar-pair">
+                    <img src="images/game/mirana.jpg" alt="Mirana" onerror="this.src=makeAvatar('mirana','game')">
+                    <img src="images/series/princess_moon.jpg" alt="Princess of the Moon" onerror="this.src=makeAvatar('mirana','series')">
+                </div>
+                <div>
+                    <div class="preview-character-title">Mirana / Princess of the Moon</div>
+                    <div class="preview-character-subtitle">Moon, faith and leadership</div>
+                </div>
+            </div>
+            <div class="preview-lore-block">
+                <div class="preview-lore-label">Лор персонажа</div>
+                <div class="preview-lore-text">В игре Mirana связана с луной, звёздами, битвой и уверенностью в победе. В сериале Princess of the Moon раскрывается через власть, веру, личную травму и ответственность.</div>
+            </div>
+            <div class="preview-mini-columns">
+                <div>
+                    <div class="preview-lore-label">Dota 2</div>
+                    <div class="preview-lore-text">Mirana выступает как боевая героиня, связанная с луной, звёздами, лидерством, уверенностью в победе и сакральной символикой.</div>
+                </div>
+                <div>
+                    <div class="preview-lore-label">Dragon Blood</div>
+                    <div class="preview-lore-text">Princess of the Moon раскрывается через власть, веру, личную травму, ответственность и более сложную политическую позицию.</div>
+                </div>
+            </div>
+            <div class="preview-card-action">
+            </div>
+        </article>
+    </div>
+
+
+    <div class="project-signature">
+        На основе дипломного проекта «Локализация интерактивных медиа на основе анализа трансформаций в переводе MOBA-игры (английский–русский)»<br>
+        Автор: Анвар С. Салманов · Научный руководитель: Анна Н. Калижанова · Карагандинский национальный исследовательский университет имени академика Е. А. Букетова · 2026<br>
+        Классификация трансформаций по В. Н. Комиссарову · Материалы: Dota 2 и сериал «Кровь дракона» (Netflix)
+    </div>
+</section>
+
+<section class="character-preview-page" id="characterPreviewPage">
+    <div class="character-preview-shell">
+        <div class="character-preview-head">
+            <div>
+                <h2 class="character-preview-title">Персонажи Dota 2 × Dragon Blood</h2>
+                <p class="character-preview-text">
+                    В этом разделе персонажи представлены в формате кроссмедийного сравнения: слева — образ героя в Dota 2, справа — его раскрытие в сериале Dragon Blood. Такой формат помогает увидеть, как меняются визуальный образ, лор и функция реплик при переходе из игры в сериал.
+                </p>
+            </div>
+            <button class="preview-btn secondary" type="button" onclick="closeCharacterPreview()">Вернуться на главный экран</button>
+        </div>
+
+        <div class="character-tabs" aria-label="Выбор персонажа для просмотра">
+            <button class="character-tab-btn active" type="button" data-character-tab="davion" onclick="showCharacterPanel('davion')">Davion / Dragon Knight</button>
+            <button class="character-tab-btn" type="button" data-character-tab="invoker" onclick="showCharacterPanel('invoker')">Invoker / Carl</button>
+            <button class="character-tab-btn" type="button" data-character-tab="mirana" onclick="showCharacterPanel('mirana')">Mirana / Princess of the Moon</button>
+        </div>
+
+        <article class="character-panel active" data-character-panel="davion">
+            <div class="character-panel-heading">
+                <div>
+                    <div class="character-panel-name">Davion / Dragon Knight</div>
+                    <div class="character-panel-subtitle">Драконья сила, воинская честь и конфликт идентичности.</div>
+                </div>
+                <span class="character-panel-mark">Hero I</span>
+            </div>
+            <div class="character-dual-windows">
+                <div class="character-big-window game-window">
+                    <div class="character-window-label">Dota 2</div>
+                    <img class="character-big-image" src="images/game/dragon_knight.jpeg" alt="Dragon Knight" onerror="this.src=makeAvatar('davion','game')">
+                    <h4>Dragon Knight</h4>
+                    <p>В игре герой представлен как эпический воин, связанный с драконьей силой, боевым пафосом, честью и образом легендарного клинка.</p>
+                </div>
+                <div class="character-big-window series-window">
+                    <div class="character-window-label">Dragon Blood</div>
+                    <img class="character-big-image" src="images/series/davion.jpeg" alt="Davion" onerror="this.src=makeAvatar('davion','series')">
+                    <h4>Davion</h4>
+                    <p>В сериале герой раскрывается через внутренний конфликт, двойственную идентичность и личное переживание связи с драконом.</p>
+                </div>
+            </div>
+            <blockquote class="character-epic-quote">«Клинок Дракона жаждет крови.»</blockquote>
+        </article>
+
+        <article class="character-panel" data-character-panel="invoker">
+            <div class="character-panel-heading">
+                <div>
+                    <div class="character-panel-name">Invoker / Carl</div>
+                    <div class="character-panel-subtitle">Знание, власть, утрата и попытка переписать реальность.</div>
+                </div>
+                <span class="character-panel-mark">Hero II</span>
+            </div>
+            <div class="character-dual-windows">
+                <div class="character-big-window game-window">
+                    <div class="character-window-label">Dota 2</div>
+                    <img class="character-big-image" src="images/game/invoker.jpg" alt="Invoker" onerror="this.src=makeAvatar('invoker','game')">
+                    <h4>Invoker</h4>
+                    <p>В игре Invoker звучит как самоуверенный архимаг, подчёркивающий интеллектуальное превосходство, магическую силу и контроль над знанием.</p>
+                </div>
+                <div class="character-big-window series-window">
+                    <div class="character-window-label">Dragon Blood</div>
+                    <img class="character-big-image" src="images/series/carl.jpg" alt="Carl" onerror="this.src=makeAvatar('invoker','series')">
+                    <h4>Carl</h4>
+                    <p>В сериале Carl становится трагическим персонажем, связанным с утратой, памятью, любовью и попыткой изменить устройство реальности.</p>
+                </div>
+            </div>
+            <blockquote class="character-epic-quote">«Я — маяк мудрости в океане невежества.»</blockquote>
+        </article>
+
+        <article class="character-panel" data-character-panel="mirana">
+            <div class="character-panel-heading">
+                <div>
+                    <div class="character-panel-name">Mirana / Princess of the Moon</div>
+                    <div class="character-panel-subtitle">Луна, вера, лидерство и личная травма.</div>
+                </div>
+                <span class="character-panel-mark">Hero III</span>
+            </div>
+            <div class="character-dual-windows">
+                <div class="character-big-window game-window">
+                    <div class="character-window-label">Dota 2</div>
+                    <img class="character-big-image" src="images/game/mirana.jpg" alt="Mirana" onerror="this.src=makeAvatar('mirana','game')">
+                    <h4>Mirana</h4>
+                    <p>В игре Mirana выступает как боевая героиня, связанная с луной, звёздами, лидерством, уверенностью в победе и сакральной символикой.</p>
+                </div>
+                <div class="character-big-window series-window">
+                    <div class="character-window-label">Dragon Blood</div>
+                    <img class="character-big-image" src="images/series/princess_moon.jpg" alt="Princess of the Moon" onerror="this.src=makeAvatar('mirana','series')">
+                    <h4>Princess of the Moon</h4>
+                    <p>В сериале героиня раскрывается через власть, веру, личную травму, ответственность и более сложную политическую позицию.</p>
+                </div>
+            </div>
+            <blockquote class="character-epic-quote">«Ослепительный свет порождает непроглядную тьму.»</blockquote>
+        </article>
+    <div class="project-signature">
+        На основе дипломного проекта «Локализация интерактивных медиа на основе анализа трансформаций в переводе MOBA-игры (английский–русский)»<br>
+        Автор: Анвар С. Салманов · Научный руководитель: Анна Н. Калижанова · Карагандинский национальный исследовательский университет имени академика Е. А. Букетова · 2026<br>
+        Классификация трансформаций по В. Н. Комиссарову · Материалы: Dota 2 и сериал «Кровь дракона» (Netflix)
+    </div>
+    </div>
+</section>
+
+<div class="trainer-page" id="trainerPage">
+
+
+<header class="app-header">
+    <div class="header-title">
+        <h1>MOBA Localization Trainer</h1>
+        <div class="sub">Dota 2 × Dragon's Blood — Трансформации по Комиссарову</div>
+    </div>
+    <div class="header-controls">
+        <button class="return-home-btn" onclick="returnToPreview()">Вернуться на главный экран</button>
+        <div class="score-badge" id="scoreBadge">
+            <span class="score-label">Счёт:</span>
+            <span class="score-num" id="scoreDisplay">0 / 0</span>
+        </div>
+        <div class="mode-switch">
+            <button class="mode-btn active" id="studyModeBtn" onclick="setMode('study')">Обучение</button>
+            <button class="mode-btn" id="practiceModeBtn" onclick="setMode('practice')">Тест</button>
+        </div>
+    </div>
+</header>
+
+<div class="controls-bar">
+    <div class="controls-left">
+        <span class="ctrl-label">Персонаж:</span>
+        <select id="charSelect" onchange="changeCharacter(this.value)">
+            <option value="all">Все персонажи</option>
+            <option value="davion">Davion (Dragon Knight)</option>
+            <option value="invoker">Invoker / Carl</option>
+            <option value="mirana">Mirana / Princess of the Moon</option>
+        </select>
+        <div class="ctrl-divider"></div>
+        <span class="ctrl-label">Метод:</span>
+        <select id="methodFilter" onchange="changeFilter(this.value)">
+            <option value="">Все трансформации</option>
+            <option value="Модуляция">Модуляция</option>
+            <option value="Компенсация">Компенсация</option>
+            <option value="Синтаксическое уподобление">Синтаксическое уподобление</option>
+            <option value="Транскрипция">Транскрипция</option>
+            <option value="Конкретизация">Конкретизация</option>
+            <option value="Опущение">Опущение</option>
+            <option value="Генерализация">Генерализация</option>
+            <option value="Калькирование">Калькирование</option>
+            <option value="Замена формы слова">Замена формы слова</option>
+            <option value="Целостное преобразование">Целостное преобразование</option>
+            <option value="Замена типа предложения">Замена типа предложения</option>
+            <option value="Добавление">Добавление</option>
+        </select>
+    </div>
+    <div class="controls-right">
+        <span class="kbd-hint"><kbd>←</kbd> <kbd>→</kbd> навигация</span>
+        <div class="ctrl-divider"></div>
+        <div class="line-nav">
+            <button class="nav-btn" id="prevBtn" onclick="navigate(-1)" title="Назад (←)">&#8592;</button>
+            <span class="line-counter" id="lineCounter">1 / 5</span>
+            <button class="nav-btn" id="nextBtn" onclick="navigate(1)" title="Вперёд (→)">&#8594;</button>
+        </div>
+        <div class="line-dots" id="lineDots"></div>
+    </div>
+</div>
+
+<div class="workspace" id="workspace">
+    <div class="card game-card" id="gameCard">
+        <div class="card-header">
+            <img class="avatar" id="gameImg" src="" alt="" onerror="this.src=makeAvatar(currentChar,'game')">
+            <div class="card-id">
+                <div class="card-name" id="gameCharName">Dragon Knight</div>
+                <div class="card-type">Игра-источник / Game Source</div>
+            </div>
+        </div>
+        <div class="quote" id="gameQuote"></div>
+        <div class="context-label">Игровой контекст</div>
+        <div class="context-text" id="gameContext"></div>
+        <div class="card-translation-block" id="gameTranslationBlock">
+            <div class="context-label">Перевод</div>
+            <div class="translation-row">
+                <div class="translation-text" id="gameTranslationText"></div>
+                <div class="method-tags" id="gameMethodTag"></div>
+            </div>
+        </div>
+        <div class="card-quiz" id="gameCardQuiz">
+            <div class="card-quiz-label">Определите трансформацию (Игра)</div>
+            <div class="multi-answer-note" id="gameMultiAnswerNote"></div>
+            <div class="card-method-options" id="gameCardOptions"></div>
+            <div class="card-quiz-feedback" id="gameCardFeedback"></div>
+            <button class="card-quiz-reveal" id="gameCardRevealBtn" onclick="revealCardAnswer('game')">Показать ответ</button>
+        </div>
+    </div>
+
+    <div class="workspace-arrow">
+        <span class="arrow-icon">&#10230;</span>
+    </div>
+
+    <div class="card series-card" id="seriesCard">
+        <div class="card-header">
+            <img class="avatar" id="seriesImg" src="" alt="" onerror="this.src=makeAvatar(currentChar,'series')">
+            <div class="card-id">
+                <div class="card-name" id="seriesCharName">Davion</div>
+                <div class="card-type">Сериал / Series Adaptation</div>
+            </div>
+        </div>
+        <div class="quote" id="seriesQuote"></div>
+        <div class="context-label">Контекст сериала</div>
+        <div class="context-text" id="seriesContext"></div>
+        <div class="card-translation-block" id="seriesTranslationBlock">
+            <div class="context-label">Перевод</div>
+            <div class="translation-row">
+                <div class="translation-text" id="seriesTranslationText"></div>
+                <div class="method-tags" id="seriesMethodTag"></div>
+            </div>
+        </div>
+        <div class="card-quiz" id="seriesCardQuiz">
+            <div class="card-quiz-label">Определите трансформацию (Сериал)</div>
+            <div class="multi-answer-note" id="seriesMultiAnswerNote"></div>
+            <div class="card-method-options" id="seriesCardOptions"></div>
+            <div class="card-quiz-feedback" id="seriesCardFeedback"></div>
+            <button class="card-quiz-reveal" id="seriesCardRevealBtn" onclick="revealCardAnswer('series')">Показать ответ</button>
+        </div>
+    </div>
+
+    <div class="empty-state" id="emptyState">
+        Нет реплик с данным типом трансформации для выбранного персонажа.<br>
+        Попробуйте другой фильтр.
+    </div>
+
+    <div class="analysis-wrap" id="analysisWrap">
+        <div class="result-panel" id="resultPanel">
+            <div class="result-top">
+                <div style="flex:1; min-width:0;">
+                    <div class="result-label">Комментарий</div>
+                    <div class="result-translation" id="resultTranslation"></div>
+                </div>
+                <button class="copy-btn" id="copyBtn" onclick="copyTranslation()">
+                    <span>&#9112;</span> Копировать
+                </button>
+            </div>
+            <div class="result-rationale" id="resultRationale"></div>
+        </div>
+
+        <div class="practice-panel" id="practicePanel">
+            <div class="practice-instruction">Определите тип трансформации по Комиссарову:</div>
+            <div class="method-options" id="methodOptions"></div>
+            <div class="practice-feedback" id="practiceFeedback"></div>
+            <div class="practice-actions">
+                <button class="practice-reveal-btn" id="revealBtn" onclick="revealAnswer()">Показать ответ</button>
+                <button class="practice-skip-btn" id="skipBtn" onclick="navigate(1)" style="display:none;">Следующая →</button>
+            </div>
+        </div>
+        <div id="practiceNextWrap" class="practice-next-wrap">
+            <button class="practice-skip-btn test-answer-btn" id="practiceSubmitBtn" onclick="submitBothAnswers()" disabled>Ответить</button>
+            <button class="practice-skip-btn test-next-btn" id="practiceNextBtn" onclick="handlePracticeNext()">Следующая карточка →</button>
+        </div>
+    </div>
+</div>
+
+<section class="test-result-screen" id="testResultScreen" aria-live="polite">
+    <div class="test-result-card">
+        <div class="test-result-kicker">Test completed</div>
+        <h2 class="test-result-title">Результат теста</h2>
+        <div class="test-result-score" id="finalScoreText">Вы набрали 0 баллов.</div>
+        <div class="test-result-details" id="finalScoreDetails">Результат будет показан после завершения теста.</div>
+    <div class="project-signature">
+        На основе дипломного проекта «Локализация интерактивных медиа на основе анализа трансформаций в переводе MOBA-игры (английский–русский)»<br>
+        Автор: Анвар С. Салманов · Научный руководитель: Анна Н. Калижанова · Карагандинский национальный исследовательский университет имени академика Е. А. Букетова · 2026<br>
+        Классификация трансформаций по В. Н. Комиссарову · Материалы: Dota 2 и сериал «Кровь дракона» (Netflix)
+    </div>
+        <button class="preview-btn" type="button" onclick="goToMainFromResult()">На главный экран</button>
+    </div>
+</section>
+
+<div class="glossary-wrap">
+    <button class="glossary-toggle" id="glossaryToggle" onclick="toggleGlossary()">
+        <em class="toggle-icon">&#9658;</em>
+        Глоссарий трансформаций по Комиссарову
+    </button>
+    <div class="glossary-grid" id="glossaryGrid"></div>
+</div>
+
+<footer class="app-footer">
+    На основе дипломного проекта «Локализация интерактивных медиа на основе анализа трансформаций в переводе MOBA-игры (английский–русский)»<br>
+    Автор: Анвар С. Салманов · Научный руководитель: Анна Н. Калижанова · Карагандинский национальный исследовательский университет имени академика Е. А. Букетова · 2026<br>
+    Классификация трансформаций по В. Н. Комиссарову · Материалы: Dota 2 и сериал «Кровь дракона» (Netflix)
+</footer>
+
+<div class="toast" id="toast">Скопировано!</div>
+
+</div>
+
+<script>
+const CHARACTERS = {
+    davion: {
+        gameName: 'Dragon Knight',
+        seriesName: 'Davion',
+        gameImage: 'images/game/dragon_knight.jpeg',
+        seriesImage: 'images/series/davion.jpeg',
+        gameInitials: 'DK',
+        seriesInitials: 'DA',
+        lines: [
+            {
+                game: '"You know too many things. Things you have no good reason to know."',
+                series: '"You know too many things. Things you have no good reason to know."',
+                gameContext: 'Игровая реплика: предупреждение противнику — герой подозревает, что тот владеет запретным знанием.',
+                seriesContext: 'Сериальная версия: та же реплика в нарративном контексте — напряжённый диалог с персонажем, знающим слишком много.',
+                gameTranslation: '«Тебе ведомо слишком многое. То, о чём ты не должен был знать.»',
+                gameMethod: 'Модуляция',
+                seriesTranslation: '«Слишком много тайн тебе открыто. И тех, что ты не должен был узнать.»',
+                seriesMethod: 'Модуляция, Конкретизация',
+                perceptionShift: 'В игре акцент на количестве знания («слишком многое»). В сериале — на его характере («тайны»), что создаёт более интригующий образ. Конкретизация превращает абстрактное знание в запретные секреты.',
+                method: 'Модуляция'
+            },
+            {
+                game: '"By the honor of the ancients."',
+                series: '"Невероятно… Я вновь ощущаю себя собой. Тем Дэвионом, которого я почти забыл."',
+                gameContext: 'В игре герой опирается на кодекс чести и традицию древних воинов.',
+                seriesContext: 'В сериале — момент возвращения к себе: герой переживает эмоциональное воссоединение со своей прежней идентичностью.',
+                gameTranslation: '«Честью древних клянусь.»',
+                gameMethod: 'Адаптация',
+                seriesTranslation: '«Невероятно… Я вновь ощущаю себя собой. Тем Дэвионом, которого я почти забыл.»',
+                seriesMethod: 'Модуляция, Добавление',
+                perceptionShift: 'Игровая реплика апеллирует к коллективной памяти и ритуалу — «честь древних» создаёт ощущение мифологической глубины. Сериал заменяет её личным переживанием возвращённой идентичности — от ритуала к психологии.',
+                method: 'Адаптация'
+            },
+            {
+                game: '"I unsheathe the Wyrmblade."',
+                series: '"Your violence is like kindness in the shadow of my rage."',
+                gameContext: 'Ритуальный жест воина: извлечение легендарного клинка как символ начала битвы.',
+                seriesContext: 'Демонстрация подавляющей силы: ярость Дэвиона настолько велика, что жестокость противника меркнет на её фоне.',
+                gameTranslation: '«Клинок Дракона жаждет крови.»',
+                gameMethod: 'Компенсация',
+                seriesTranslation: '«Твоя жестокость меркнет перед моей яростью – она почти что доброта.»',
+                seriesMethod: 'Стилистическая модуляция',
+                perceptionShift: 'Игра делает акцент на ритуале и символике оружия. Сериал смещает фокус на внутреннее состояние — ярость как мерило силы. Адаптация меняет внешний образ воина на психологический портрет.',
+                method: 'Компенсация'
+            },
+            {
+                game: '"I need no steed."',
+                series: '"Davion the Dragon Knight, and I\'m him. And for the longest time, I thought I was just Davion..."',
+                gameContext: 'Самодостаточность воина: Dragon Knight не нуждается в лошади, полагаясь лишь на собственную силу.',
+                seriesContext: 'Осознание двойственной идентичности: герой принимает своё новое «я» — не просто Дэвион, а Рыцарь Дракона.',
+                gameTranslation: '«И без коня управлюсь.»',
+                gameMethod: 'Модуляция',
+                seriesTranslation: '«Дэвион, Рыцарь Дракона – вот кто я. А раньше я думал, что я всего лишь Дэвион.»',
+                seriesMethod: 'Модуляция',
+                perceptionShift: 'Краткая игровая реплика о физической самодостаточности трансформируется в развёрнутый монолог об идентичности. Кроссмедийный переход превращает боевое хвастовство в экзистенциальное осмысление себя.',
+                method: 'Модуляция'
+            },
+            {
+                game: '"I\'ve killed dragons less deserving of death."',
+                series: '"I wanted blood once. I wanted your blood. You suffered for my rage."',
+                gameContext: 'Угроза противнику: даже драконы, заслуживающие смерти меньше, уже пали от руки героя.',
+                seriesContext: 'Признание вины и осознание прошлой жестокости: герой берёт ответственность за причинённую боль.',
+                gameTranslation: '«Моя рука разила драконов и за меньшее.»',
+                gameMethod: 'Модуляция',
+                seriesTranslation: '«Я жаждал крови, и твоей в том числе. Ты пострадал, пока я был во власти ярости.»',
+                seriesMethod: 'Адаптация',
+                perceptionShift: 'Игра использует угрозу как демонстрацию силы — взгляд снаружи, на врага. Сериал разворачивает ту же тему внутрь — признание вины и сострадание к жертве. Слом восприятия: из агрессора в рефлексирующего героя.',
+                method: 'Адаптация'
+            }
+        ]
+    },
+    invoker: {
+        gameName: 'Invoker',
+        seriesName: 'Carl',
+        gameImage: 'images/game/invoker.jpg',
+        seriesImage: 'images/series/carl.jpg',
+        gameInitials: 'IN',
+        seriesInitials: 'CA',
+        lines: [
+            {
+                game: '"Oh, they\'ll rue the day they crossed me!"',
+                series: '"What cannot be named cannot be known. What cannot be known, cannot be hurt."',
+                gameContext: 'Гнев и угроза расправы — эмоциональный всплеск нарцисса, которому осмелились перечить.',
+                seriesContext: 'Философское рассуждение о природе боли и знания — Карл как архимаг-мыслитель.',
+                gameTranslation: '«Ох, они пожалеют о том дне, когда перешли мне дорогу!»',
+                gameMethod: 'Модуляция',
+                seriesTranslation: '«Невыразимое не познаётся. Непознанное не страдает.»',
+                seriesMethod: 'Модуляция',
+                perceptionShift: 'Эмоциональный взрыв мести в игре противопоставлен холодной философской дистанции в сериале. Один и тот же персонаж: в игре — оскорблённый нарцисс, в сериале — бесстрастный мыслитель. Кроссмедийная адаптация обнажает разрыв между аффектом и интеллектом.',
+                method: 'Модуляция'
+            },
+            {
+                game: '"I\'ll luck upon you."',
+                series: '"That\'s not how this story ends. This is how every story ends. In death. In regret."',
+                gameContext: 'Самоуверенная насмешка: встреча с Инвокером — «удача» для противника, которую тот не оценит.',
+                seriesContext: 'Фаталистическое пророчество: Карл провозглашает неизбежность смерти и сожаления как финала любой истории.',
+                gameTranslation: '«Сообщаю, что дело сделано!»',
+                gameMethod: 'Модуляция',
+                seriesTranslation: '«Эта история закончится не так. Так заканчиваются все истории: смертью. Сожалением.»',
+                seriesMethod: 'Синтаксическое уподобление',
+                perceptionShift: 'Игровая реплика — лёгкое, ироничное превосходство. Сериальная — тяжёлый экзистенциальный приговор. Переход от иронии к трагизму показывает, как медиаформат меняет глубину персонажа.',
+                method: 'Синтаксическое уподобление'
+            },
+            {
+                game: '"It\'s to me to inform you that this one is in the bag."',
+                series: '"Foulfell shares the same structure as the rest of reality. It still requires light, gravity, substance."',
+                gameContext: 'Самодовольное объявление победы — Инвокер констатирует очевидное с нарочитой торжественностью.',
+                seriesContext: 'Научно-магический анализ: Карл описывает измерение Фоулфелл как исследователь, оперируя физическими категориями.',
+                gameTranslation: '«Будь проклят.»',
+                gameMethod: 'Модуляция',
+                seriesTranslation: '«Фоулфелл имеет ту же структуру, что и остальная реальность. Ему всё ещё нужны свет, гравитация, материя.»',
+                seriesMethod: 'Транскрипция, Синтаксическое уподобление',
+                perceptionShift: 'Игра: Инвокер — самовлюблённый победитель. Сериал: Карл — холодный учёный-маг. Тот же интеллект, но направленный не на самолюбование, а на познание. Адаптация превращает нарцисса в архетип мудреца.',
+                method: 'Транскрипция'
+            },
+            {
+                game: '"Like a match already dim and damp, your mind snuffs out."',
+                series: '"Creation is a delicate thing. It took hundreds of iterations simply to learn how to make a stable universe."',
+                gameContext: 'Поэтическая насмешка над слабостью разума противника — метафора угасающей спички.',
+                seriesContext: 'Карл раскрывает себя как демиурга, участвовавшего в создании вселенных — масштаб знания за пределами человеческого.',
+                gameTranslation: '«Твой ум гаснет, как сырая спичка.»',
+                gameMethod: 'Модуляция, Опущение',
+                seriesTranslation: '«Сотворение мира — процесс тонкий. Сотни циклов потребовались, чтобы постичь создание устойчивой вселенной.»',
+                seriesMethod: 'Конкретизация',
+                perceptionShift: 'Игровая метафора унижает конкретного противника. Сериальная реплика разворачивает тот же интеллект в космический масштаб. Слом восприятия: от высокомерия над слабым к величию перед бесконечностью.',
+                method: 'Опущение'
+            },
+            {
+                game: '"I am a beacon of knowledge blazing out across a black sea of ignorance."',
+                series: '"Stories are stories. Dead is dead. No one can change that. Not even I can change that."',
+                gameContext: 'Пышная самохарактеристика: Инвокер — свет знания в океане невежества.',
+                seriesContext: 'Карл признаёт границы своего могущества — даже он не властен над смертью.',
+                gameTranslation: '«Я — маяк мудрости в океане невежества.»',
+                gameMethod: 'Опущение, Модуляция, Генерализация',
+                seriesTranslation: '«Сказки — это сказки. Мёртвый — мёртв. Ничто этого не изменит. Даже я бессилен.»',
+                seriesMethod: 'Синтаксическое уподобление, Компенсация',
+                perceptionShift: 'Самопровозглашённое всемогущество в игре разбивается о признание бессилия в сериале. Кроссмедийная адаптация создаёт наиболее драматичный слом: из абсолютного нарцисса — в персонажа с трагической уязвимостью.',
+                method: 'Генерализация'
+            }
+        ]
+    },
+    mirana: {
+        gameName: 'Mirana',
+        seriesName: 'Princess of the Moon',
+        gameImage: 'images/game/mirana.jpg',
+        seriesImage: 'images/series/princess_moon.jpg',
+        gameInitials: 'MI',
+        seriesInitials: 'PM',
+        lines: [
+            {
+                game: '"Nothing stirs the blood like battle. It\'s better than catnip!"',
+                series: '"The brightest lights cast the darkest shadows."',
+                gameContext: 'Азарт битвы и лёгкий юмор — воительница сравнивает боевой задор с кошачьей радостью.',
+                seriesContext: 'Философское наблюдение о природе света и тьмы — Принцесса Луны как персонаж с трагическим мировоззрением.',
+                gameTranslation: '«Ничто не горячит кровь лучше битвы. Она лучше, чем кошачья мята!»',
+                gameMethod: 'Калькирование, Модуляция',
+                seriesTranslation: '«Ослепительный свет порождает непроглядную тьму.»',
+                seriesMethod: 'Модуляция, Замена формы слова',
+                perceptionShift: 'Игровой азарт и телесная радость битвы сменяются холодной философией контрастов. Кроссмедийная адаптация превращает импульсивную воительницу в мыслителя, осознавшего цену каждой победы.',
+                method: 'Модуляция'
+            },
+            {
+                game: '"Tuck your tail and run, you mutt!"',
+                series: '"You will not be happy when you awaken, Davion the Dragon Knight. But you\'ll live."',
+                gameContext: 'Насмешка над противником в бою — агрессивный вызов, унижение врага.',
+                seriesContext: 'Сдержанная забота о раненом союзнике — Принцесса Луны говорит жёстко, но с состраданием.',
+                gameTranslation: '«Беги, поджав хвост, щенок.»',
+                gameMethod: 'Модуляция, Генерализация',
+                seriesTranslation: '«Когда очнёшься, Дэвион, Рыцарь Дракона, ты не обрадуешься. Но будешь жить.»',
+                seriesMethod: 'Синтаксическое уподобление, Компенсация',
+                perceptionShift: 'Агрессия, направленная на врага в игре, трансформируется в сдержанную заботу о союзнике в сериале. Один голос — два полюса: разрушение и защита. Слом восприятия через смену адресата реплики.',
+                method: 'Генерализация'
+            },
+            {
+                game: '"Pathetic whelp."',
+                series: '"Never harm me? It was you, wasn\'t it? You murdered my parents. You took them from me. You took everything from me!"',
+                gameContext: 'Краткое презрительное оскорбление поверженного противника.',
+                seriesContext: 'Эмоциональный срыв — обвинение предателя в убийстве родителей, крик боли и утраты.',
+                gameTranslation: '«Жалкий молокосос.»',
+                gameMethod: 'Компенсация, Модуляция',
+                seriesTranslation: '«Ты же обещал меня не трогать... Это был ты, да? Ты убил моих родителей. Отнял всё!»',
+                seriesMethod: 'Модуляция, Компенсация',
+                perceptionShift: 'Двухсловное презрение в игре против развёрнутого крика боли в сериале. Кроссмедийный переход обнажает за холодной воительницей травмированного человека — слом от силы к уязвимости.',
+                method: 'Компенсация'
+            },
+            {
+                game: '"The stars are in alignment, and our victory is certain."',
+                series: '"Yes, I\'m beautiful. But my arrows are even more precise — keep it in mind for the future."',
+                gameContext: 'Торжественное пророчество победы — Мирана черпает уверенность в небесных знаках.',
+                seriesContext: 'Ироничное самоутверждение — Принцесса Луны демонстрирует силу через контраст красоты и смертоносности.',
+                gameTranslation: '«Звёзды встали как надо, победа будет за нами.»',
+                gameMethod: 'Компенсация, Модуляция',
+                seriesTranslation: '«Я прекрасна, согласна. Но мои стрелы куда точнее — не забывай об этом.»',
+                seriesMethod: 'Модуляция, Компенсация',
+                perceptionShift: 'Мистическая уверенность через звёзды в игре уступает личной, иронической уверенности в сериале. Источник силы смещается: от космоса — к самой себе. Персонаж становится самодостаточным.',
+                method: 'Компенсация'
+            },
+            {
+                game: '"Thus, you pay."',
+                series: '"Yes, I\'m beautiful. But my arrows are even more precise — keep it in mind for the future."',
+                gameContext: 'Краткий приговор — лаконичное завершение боя, констатация расплаты.',
+                seriesContext: 'Ироничная угроза с самоиронией — сила подчёркивается через неожиданный контраст с внешностью.',
+                gameTranslation: '«Горе побеждённым.»',
+                gameMethod: 'Целостное преобразование, Модуляция',
+                seriesTranslation: '«Я прекрасна, согласна. Но мои стрелы куда точнее — не забывай об этом.»',
+                seriesMethod: 'Модуляция, Замена типа предложения',
+                perceptionShift: 'Игровой лаконизм — приговор без лишних слов, эхо античной традиции. Сериал разворачивает ту же угрозу в ироничный монолог. Слом: от эпической краткости к современной самопрезентации.',
+                method: 'Целостное преобразование'
+            }
+        ]
+    }
+};
+
+// Виртуальный персонаж "Все" — объединяет реплики всех персонажей
+function getAllLines() {
+    const result = [];
+    ['davion', 'invoker', 'mirana'].forEach(charId => {
+        CHARACTERS[charId].lines.forEach(line => {
+            result.push({ ...line, _charId: charId });
+        });
+    });
+    return result;
+}
+
+const GLOSSARY = [
+    {
+        name: 'Модуляция (Смысловое развитие)',
+        desc: 'Замена единицы перевода, связанной с оригиналом причинно-следственными отношениями. Значение логически вытекает из источника, но переформулировано иначе.',
+        example: 'Пример: "He is dead" → "Он потерял жизнь" (следствие вместо факта).'
+    },
+    {
+        name: 'Компенсация',
+        desc: 'Восполнение потери при переводе в одном месте за счёт введения эквивалентного элемента в другом.',
+        example: 'Пример: непереводимая игра слов в начале → иная игра слов в другом месте текста.'
+    },
+    {
+        name: 'Синтаксическое уподобление',
+        desc: 'Сохранение синтаксической структуры оригинала при переводе — порядка слов, членения на предложения.',
+        example: 'Пример: короткие рубленые фразы оригинала сохраняются в переводе без объединения.'
+    },
+    {
+        name: 'Транскрипция',
+        desc: 'Передача звуковой формы иноязычного слова средствами переводящего языка.',
+        example: 'Пример: "Foulfell" → "Фоулфелл" (транскрипция собственного имени).'
+    },
+    {
+        name: 'Конкретизация',
+        desc: 'Замена слова с широким значением словом с более узким, конкретным значением.',
+        example: 'Пример: "things" → "тайны" (уточнение абстрактного понятия).'
+    },
+    {
+        name: 'Опущение',
+        desc: 'Отказ от передачи в переводе семантически избыточных слов, значение которых восстанавливается из контекста.',
+        example: 'Пример: "already dim and damp" → "сырая" (опущение одного из синонимичных определений).'
+    },
+    {
+        name: 'Генерализация',
+        desc: 'Замена единицы с узким предметно-логическим значением единицей с более широким значением.',
+        example: 'Пример: "blazing out" → без этого уточнения, общий образ маяка сохраняется.'
+    },
+    {
+        name: 'Калькирование',
+        desc: 'Пословный перевод иноязычной единицы — каждый элемент оригинала передаётся соответствующим элементом языка перевода.',
+        example: 'Пример: "stirs the blood" → "горячит кровь" (дословная передача образа).'
+    },
+    {
+        name: 'Замена формы слова',
+        desc: 'Изменение морфологической формы слова при сохранении лексического значения — замена числа, падежа, степени прилагательного и т.д.',
+        example: 'Пример: "the darkest shadows" → "непроглядную тьму" (мн. число → ед. число, усиление через иной суффикс).'
+    },
+    {
+        name: 'Целостное преобразование',
+        desc: 'Полная замена как формы, так и значения единицы перевода при сохранении общей прагматической функции высказывания.',
+        example: 'Пример: "Thus, you pay" → "Горе побеждённым" (смысл расплаты передаётся крылатым выражением).'
+    },
+    {
+        name: 'Замена типа предложения',
+        desc: 'Преобразование синтаксического типа предложения: повествовательное → вопросительное, восклицательное → утвердительное и т.д.',
+        example: 'Пример: утвердительное "keep it in mind" → побудительное "не забывай об этом".'
+    },
+    {
+        name: 'Добавление',
+        desc: 'Введение в перевод дополнительных лексических единиц, отсутствующих в оригинале, для передачи имплицитного смысла или компенсации культурных различий.',
+        example: 'Пример: добавление эмоционального акцента «вновь» для передачи идеи возвращения.'
+    }
+];
+
+const ALL_METHODS = GLOSSARY.map(g => g.name.split(' (')[0]);
+
+// ── СОСТОЯНИЕ ──
+let currentChar = 'all';
+let currentMode = 'study';
+let methodFilter = '';
+let currentLineIndex = 0;
+let practiceAnswered = false;
+let practiceScore = { correct: 0, total: 0 };
+let studyCardAnswered = { game: false, series: false };
+let studyCardSelected = { game: [], series: [] };
+let practiceLineOrder = [];
+let practiceOrderKey = '';
+let testFinished = false;
+let glossaryOpen = false;
+
+function makeAvatar(charId, side) {
+    if (charId === 'all') {
+        const color = side === 'game' ? '%23154080' : '%23406015';
+        const textColor = side === 'game' ? '%23aaccff' : '%23ccff80';
+        const initials = side === 'game' ? 'ALL' : 'ALL';
+        return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='54'%3E%3Ccircle cx='27' cy='27' r='27' fill='${color}'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='${textColor}' font-size='18' font-family='Arial' font-weight='bold'%3E${initials}%3C/text%3E%3C/svg%3E`;
+    }
+    const char = CHARACTERS[charId];
+    const initials = side === 'game' ? char.gameInitials : char.seriesInitials;
+    const color = side === 'game' ? '%23801515' : '%23806010';
+    const textColor = side === 'game' ? '%23ffaaaa' : '%23ffd070';
+    return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='54'%3E%3Ccircle cx='27' cy='27' r='27' fill='${color}'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='${textColor}' font-size='18' font-family='Arial' font-weight='bold'%3E${initials}%3C/text%3E%3C/svg%3E`;
+}
+
+function getCharData(line) {
+    if (currentChar === 'all' && line._charId) {
+        return CHARACTERS[line._charId];
+    }
+    return CHARACTERS[currentChar];
+}
+
+function getBaseFilteredLines() {
+    let lines;
+    if (currentChar === 'all') {
+        lines = getAllLines();
+    } else {
+        lines = CHARACTERS[currentChar].lines;
+    }
+    if (!methodFilter) return lines;
+    return lines.filter(l =>
+        l.gameMethod.includes(methodFilter) ||
+        l.seriesMethod.includes(methodFilter) ||
+        l.method.includes(methodFilter)
+    );
+}
+
+function shuffleLines(lines) {
+    const shuffled = [...lines];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+function resetPracticeOrder() {
+    practiceLineOrder = [];
+    practiceOrderKey = '';
+}
+
+function getFilteredLines() {
+    const lines = getBaseFilteredLines();
+
+    if (currentMode !== 'practice') {
+        return lines;
+    }
+
+    const key = `${currentChar}|${methodFilter}|${lines.length}`;
+    if (practiceOrderKey !== key || practiceLineOrder.length !== lines.length) {
+        practiceLineOrder = shuffleLines(lines);
+        practiceOrderKey = key;
+    }
+
+    return practiceLineOrder;
+}
+
+function navigate(dir) {
+    if (currentMode === 'practice') {
+        if (dir < 0) return;
+        if (dir > 0 && !(studyCardAnswered.game && studyCardAnswered.series)) return;
+    }
+
+    const filtered = getFilteredLines();
+    const newIdx = currentLineIndex + dir;
+    if (newIdx < 0 || newIdx >= filtered.length) return;
+    currentLineIndex = newIdx;
+    practiceAnswered = false;
+    resetCardQuizState();
+    render();
+}
+
+function changeCharacter(charId) {
+    testFinished = false;
+    restoreTrainerInterface();
+    currentChar = charId;
+    currentLineIndex = 0;
+    practiceAnswered = false;
+    resetCardQuizState();
+    resetPracticeOrder();
+    render();
+}
+
+function changeFilter(val) {
+    testFinished = false;
+    restoreTrainerInterface();
+    methodFilter = val;
+    currentLineIndex = 0;
+    practiceAnswered = false;
+    resetCardQuizState();
+    resetPracticeOrder();
+    render();
+}
+
+function setMode(mode) {
+    testFinished = false;
+    restoreTrainerInterface();
+    currentMode = mode;
+    practiceAnswered = false;
+    resetCardQuizState();
+    currentLineIndex = 0;
+    if (mode === 'practice') {
+        practiceScore = { correct: 0, total: 0 };
+        resetPracticeOrder();
+    }
+    render();
+}
+
+function renderMethodTags(containerId, methodStr) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    methodStr.split(',').map(m => m.trim()).filter(Boolean).forEach(m => {
+        const tag = document.createElement('span');
+        tag.className = 'method-tag';
+        tag.textContent = m;
+        tag.title = getMethodDesc(m);
+        container.appendChild(tag);
+    });
+}
+
+function render() {
+    if (testFinished) {
+        showTestResultScreen();
+        return;
+    }
+    restoreTrainerInterface();
+    const filtered = getFilteredLines();
+    const hasLines = filtered.length > 0;
+    const line = hasLines ? filtered[currentLineIndex] : null;
+    const charData = line ? getCharData(line) : (currentChar !== 'all' ? CHARACTERS[currentChar] : CHARACTERS['davion']);
+
+    document.getElementById('studyModeBtn').classList.toggle('active', currentMode === 'study');
+    document.getElementById('practiceModeBtn').classList.toggle('active', currentMode === 'practice');
+
+    const badge = document.getElementById('scoreBadge');
+    badge.classList.toggle('visible', currentMode === 'practice');
+    document.getElementById('scoreDisplay').textContent = `${practiceScore.correct} / ${practiceScore.total}`;
+
+    document.getElementById('emptyState').style.display = hasLines ? 'none' : 'block';
+    document.getElementById('gameCard').style.display = hasLines ? 'block' : 'none';
+    document.getElementById('seriesCard').style.display = hasLines ? 'block' : 'none';
+    document.querySelector('.workspace-arrow').style.display = hasLines ? 'flex' : 'none';
+    document.getElementById('analysisWrap').style.display = hasLines ? 'block' : 'none';
+
+    if (!hasLines) { renderNav(filtered); return; }
+
+    document.getElementById('gameCharName').textContent = charData.gameName;
+    document.getElementById('seriesCharName').textContent = charData.seriesName;
+
+    const effectiveCharId = (currentChar === 'all' && line._charId) ? line._charId : currentChar;
+
+    const gameImg = document.getElementById('gameImg');
+    gameImg.src = charData.gameImage;
+    gameImg.onerror = () => { gameImg.src = makeAvatar(effectiveCharId, 'game'); };
+
+    const seriesImg = document.getElementById('seriesImg');
+    seriesImg.src = charData.seriesImage;
+    seriesImg.onerror = () => { seriesImg.src = makeAvatar(effectiveCharId, 'series'); };
+
+    document.getElementById('gameQuote').textContent = line.game;
+    document.getElementById('seriesQuote').textContent = line.series;
+    document.getElementById('gameContext').textContent = line.gameContext;
+    document.getElementById('seriesContext').textContent = line.seriesContext;
+
+    document.getElementById('gameTranslationText').textContent = line.gameTranslation;
+    renderMethodTags('gameMethodTag', line.gameMethod);
+    document.getElementById('seriesTranslationText').textContent = line.seriesTranslation;
+    renderMethodTags('seriesMethodTag', line.seriesMethod);
+
+    const isPractice = currentMode === 'practice';
+
+    document.getElementById('gameMethodTag').style.display = isPractice ? 'none' : '';
+    document.getElementById('seriesMethodTag').style.display = isPractice ? 'none' : '';
+
+    const studyPanel = document.getElementById('resultPanel');
+    const practicePanel = document.getElementById('practicePanel');
+    const gameQuiz = document.getElementById('gameCardQuiz');
+    const seriesQuiz = document.getElementById('seriesCardQuiz');
+
+    if (currentMode === 'study') {
+        studyPanel.style.display = 'block';
+        practicePanel.classList.remove('visible');
+        gameQuiz.classList.remove('visible');
+        seriesQuiz.classList.remove('visible');
+        document.getElementById('practiceNextWrap').style.display = 'none';
+        document.getElementById('resultTranslation').textContent = '';
+        document.getElementById('resultRationale').textContent = line.perceptionShift;
+    } else {
+        studyPanel.style.display = 'none';
+        practicePanel.classList.remove('visible');
+        gameQuiz.classList.add('visible');
+        seriesQuiz.classList.add('visible');
+        document.getElementById('practiceNextWrap').style.display = 'flex';
+        renderCardQuiz('game', line);
+        renderCardQuiz('series', line);
+        updatePracticeNextButton();
+    }
+
+    renderNav(filtered);
+}
+
+function renderNav(filtered) {
+    const total = filtered.length;
+    const idx = currentLineIndex;
+    const isPractice = currentMode === 'practice';
+    const readyForNext = studyCardAnswered.game && studyCardAnswered.series;
+    const isLast = idx >= total - 1;
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    document.getElementById('lineCounter').textContent = total > 0 ? `${idx + 1} / ${total}` : '0 / 0';
+
+    // В тесте назад возвращаться нельзя, но стрелка вперёд работает после ответа.
+    prevBtn.disabled = isPractice ? true : (idx === 0 || total === 0);
+    nextBtn.disabled = isPractice
+        ? (!readyForNext || isLast || total === 0)
+        : (isLast || total === 0);
+
+    prevBtn.title = isPractice ? 'В тесте нельзя возвращаться к предыдущим вопросам' : 'Назад (←)';
+    nextBtn.title = isPractice
+        ? (readyForNext ? 'Перейти к следующей карточке' : 'Сначала ответьте на обе трансформации')
+        : 'Вперёд (→)';
+
+    const dotsEl = document.getElementById('lineDots');
+    dotsEl.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+        const d = document.createElement('span');
+        d.className = 'dot' + (i === idx ? ' active' : '');
+        if (isPractice) {
+            d.style.pointerEvents = 'none';
+            d.style.opacity = i === idx ? '1' : '0.35';
+            d.title = 'В тесте нельзя возвращаться к предыдущим вопросам';
+        } else {
+            d.onclick = () => { currentLineIndex = i; practiceAnswered = false; resetCardQuizState(); render(); };
+        }
+        dotsEl.appendChild(d);
+    }
+}
+
+
+
+function splitMethods(methodStr) {
+    return String(methodStr || '')
+        .split(',')
+        .map(m => m.trim())
+        .filter(Boolean);
+}
+
+function hasMultipleMethods(methodStr) {
+    return splitMethods(methodStr).length > 1;
+}
+
+function normalizeMethods(methods) {
+    return methods.map(m => String(m || '').trim()).filter(Boolean).sort();
+}
+
+function isExactMethodSet(selected, correct) {
+    const selectedMethods = normalizeMethods(selected);
+    const correctMethods = normalizeMethods(splitMethods(correct));
+    if (selectedMethods.length !== correctMethods.length) return false;
+    return selectedMethods.every((method, index) => method === correctMethods[index]);
+}
+
+function formatMethodList(methodStr) {
+    return splitMethods(methodStr).map(m => `«${m}»`).join(', ');
+}
+
+function resetCardQuizState() {
+    studyCardAnswered = { game: false, series: false };
+    studyCardSelected = { game: [], series: [] };
+}
+
+function getSideElementIds(side) {
+    return {
+        optionsId: side === 'game' ? 'gameCardOptions' : 'seriesCardOptions',
+        feedbackId: side === 'game' ? 'gameCardFeedback' : 'seriesCardFeedback',
+        revealId: side === 'game' ? 'gameCardRevealBtn' : 'seriesCardRevealBtn',
+        submitId: side === 'game' ? 'gameCardSubmitBtn' : 'seriesCardSubmitBtn',
+        noteId: side === 'game' ? 'gameMultiAnswerNote' : 'seriesMultiAnswerNote'
+    };
+}
+
+function renderCardQuiz(side, line) {
+    const ids = getSideElementIds(side);
+    const optionsEl = document.getElementById(ids.optionsId);
+    const feedbackEl = document.getElementById(ids.feedbackId);
+    const revealBtn = document.getElementById(ids.revealId);
+    const noteEl = document.getElementById(ids.noteId);
+    const correctMethod = side === 'game' ? line.gameMethod : line.seriesMethod;
+    const answered = studyCardAnswered[side];
+    const methods = splitMethods(correctMethod);
+
+    feedbackEl.className = 'card-quiz-feedback';
+    feedbackEl.textContent = '';
+    optionsEl.innerHTML = '';
+    revealBtn.style.display = answered ? 'none' : 'inline-block';
+
+    if (methods.length > 1) {
+        noteEl.textContent = `В этом вопросе ${methods.length} правильных ответа. Выберите все подходящие варианты.`;
+        noteEl.classList.add('visible');
+    } else {
+        noteEl.textContent = '';
+        noteEl.classList.remove('visible');
+    }
+
+    ALL_METHODS.forEach(m => {
+        const btn = document.createElement('button');
+        btn.className = 'card-method-btn';
+        btn.textContent = m;
+        btn.disabled = answered;
+        if (studyCardSelected[side].includes(m)) btn.classList.add('selected');
+        btn.onclick = () => toggleCardSelection(side, m, correctMethod);
+        optionsEl.appendChild(btn);
+    });
+
+    if (answered) {
+        highlightCardAnswer(side, correctMethod, null);
+    }
+}
+
+function toggleCardSelection(side, chosen, correct) {
+    if (studyCardAnswered[side]) return;
+
+    const selected = studyCardSelected[side];
+    const existingIndex = selected.indexOf(chosen);
+    const correctCount = splitMethods(correct).length;
+
+    if (existingIndex >= 0) {
+        selected.splice(existingIndex, 1);
+    } else {
+        if (correctCount === 1) {
+            studyCardSelected[side] = [chosen];
+        } else {
+            selected.push(chosen);
+        }
+    }
+
+    const ids = getSideElementIds(side);
+    const optionsEl = document.getElementById(ids.optionsId);
+    optionsEl.querySelectorAll('.card-method-btn').forEach(btn => {
+        btn.classList.toggle('selected', studyCardSelected[side].includes(btn.textContent));
+    });
+
+    updatePracticeNextButton();
+}
+
+function evaluateCardAnswer(side) {
+    const filtered = getFilteredLines();
+    const line = filtered[currentLineIndex];
+    if (!line || studyCardAnswered[side]) return false;
+
+    const correct = side === 'game' ? line.gameMethod : line.seriesMethod;
+    const selected = studyCardSelected[side];
+    if (!selected.length) return false;
+
+    studyCardAnswered[side] = true;
+
+    const isCorrect = isExactMethodSet(selected, correct);
+    practiceScore.total++;
+    if (isCorrect) practiceScore.correct++;
+    document.getElementById('scoreDisplay').textContent = `${practiceScore.correct} / ${practiceScore.total}`;
+
+    highlightCardAnswer(side, correct, selected);
+
+    const ids = getSideElementIds(side);
+    const feedbackEl = document.getElementById(ids.feedbackId);
+    feedbackEl.classList.add('visible');
+    if (isCorrect) {
+        feedbackEl.classList.add('ok');
+        feedbackEl.innerHTML = `<strong>Верно!</strong> Правильный ответ: ${formatMethodList(correct)}.`;
+    } else {
+        feedbackEl.classList.add('fail');
+        feedbackEl.innerHTML = `<strong>Не совсем.</strong> Вы выбрали: ${selected.map(m => `«${m}»`).join(', ')}.<br>Правильный ответ: ${formatMethodList(correct)}.`;
+    }
+
+    const revealBtn = document.getElementById(ids.revealId);
+    if (revealBtn) revealBtn.style.display = 'none';
+    document.querySelectorAll(`#${ids.optionsId} .card-method-btn`).forEach(b => b.disabled = true);
+    return true;
+}
+
+function canSubmitBothAnswers() {
+    if (studyCardAnswered.game && studyCardAnswered.series) return false;
+    const gameReady = studyCardAnswered.game || studyCardSelected.game.length > 0;
+    const seriesReady = studyCardAnswered.series || studyCardSelected.series.length > 0;
+    return gameReady && seriesReady;
+}
+
+function submitBothAnswers() {
+    if (!canSubmitBothAnswers()) return;
+    evaluateCardAnswer('game');
+    evaluateCardAnswer('series');
+    updatePracticeNextButton();
+}
+
+function submitCardAnswer(side) {
+    evaluateCardAnswer(side);
+    updatePracticeNextButton();
+}
+
+function highlightCardAnswer(side, correct, chosen) {
+    const ids = getSideElementIds(side);
+    const optionsEl = document.getElementById(ids.optionsId);
+    const correctMethods = splitMethods(correct);
+    const chosenMethods = Array.isArray(chosen) ? chosen : (chosen ? [chosen] : []);
+
+    optionsEl.querySelectorAll('.card-method-btn').forEach(btn => {
+        const isCorrectBtn = correctMethods.some(method => method === btn.textContent || method.startsWith(btn.textContent));
+        const isChosenBtn = chosenMethods.includes(btn.textContent);
+        btn.classList.remove('selected');
+        if (chosen === null) {
+            if (isCorrectBtn) btn.classList.add('reveal-correct');
+        } else {
+            if (isCorrectBtn) btn.classList.add('correct');
+            if (isChosenBtn && !isCorrectBtn) btn.classList.add('wrong');
+        }
+    });
+}
+
+function revealCardAnswer(side) {
+    const filtered = getFilteredLines();
+    const line = filtered[currentLineIndex];
+    if (!line || studyCardAnswered[side]) return;
+
+    studyCardAnswered[side] = true;
+    const correct = side === 'game' ? line.gameMethod : line.seriesMethod;
+
+    highlightCardAnswer(side, correct, null);
+    const ids = getSideElementIds(side);
+    const revealBtn = document.getElementById(ids.revealId);
+    if (revealBtn) revealBtn.style.display = 'none';
+    document.querySelectorAll(`#${ids.optionsId} .card-method-btn`).forEach(b => b.disabled = true);
+
+    const feedbackEl = document.getElementById(ids.feedbackId);
+    feedbackEl.classList.add('visible');
+    feedbackEl.innerHTML = `Тип трансформации: ${formatMethodList(correct)}.`;
+
+    updatePracticeNextButton();
+}
+
+function isLastPracticeCard() {
+    const filtered = getFilteredLines();
+    return currentMode === 'practice' && filtered.length > 0 && currentLineIndex >= filtered.length - 1;
+}
+
+function updatePracticeNextButton() {
+    const btn = document.getElementById('practiceNextBtn');
+    const answerBtn = document.getElementById('practiceSubmitBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const filtered = getFilteredLines();
+    const last = isLastPracticeCard();
+    const ready = studyCardAnswered.game && studyCardAnswered.series;
+    const canAnswer = canSubmitBothAnswers();
+
+    if (answerBtn) {
+        answerBtn.style.display = ready ? 'none' : 'inline-flex';
+        answerBtn.disabled = !canAnswer;
+        answerBtn.title = canAnswer
+            ? 'Проверить ответы для Dota 2 и Dragon Blood'
+            : 'Выберите вариант ответа в обеих карточках';
+    }
+
+    if (btn) {
+        btn.textContent = last ? 'Завершить тест' : 'Следующая карточка →';
+        btn.classList.toggle('finish', last);
+        btn.disabled = !ready;
+        btn.title = ready
+            ? (last ? 'Завершить тест' : 'Перейти к следующей карточке')
+            : 'Сначала нажмите «Ответить»';
+    }
+
+    // В режиме теста верхняя стрелка «назад» всегда заблокирована.
+    // Стрелка «вперёд» работает только после общей проверки ответа.
+    if (currentMode === 'practice') {
+        if (prevBtn) {
+            prevBtn.disabled = true;
+            prevBtn.title = 'В тесте нельзя возвращаться к предыдущим вопросам';
+        }
+        if (nextBtn) {
+            nextBtn.disabled = !ready || last || filtered.length === 0;
+            nextBtn.title = ready
+                ? (last ? 'На последней карточке нажмите «Завершить тест»' : 'Перейти к следующей карточке')
+                : 'Сначала нажмите «Ответить»';
+        }
+    }
+}
+
+function handlePracticeNext() {
+    if (!(studyCardAnswered.game && studyCardAnswered.series)) return;
+    if (isLastPracticeCard()) {
+        finishTest();
+    } else {
+        navigate(1);
+    }
+}
+
+function getMaxPracticeScore() {
+    return getFilteredLines().length * 2;
+}
+
+function finishTest() {
+    testFinished = true;
+    showTestResultScreen();
+}
+
+function restoreTrainerInterface() {
+    const trainerPage = document.getElementById('trainerPage');
+    if (!trainerPage) return;
+    const header = trainerPage.querySelector('.app-header');
+    const controls = trainerPage.querySelector('.controls-bar');
+    const workspace = document.getElementById('workspace');
+    const glossary = trainerPage.querySelector('.glossary-wrap');
+    const footer = trainerPage.querySelector('.app-footer');
+    const resultScreen = document.getElementById('testResultScreen');
+
+    if (header) header.style.display = 'flex';
+    if (controls) controls.style.display = 'flex';
+    if (workspace) workspace.style.display = 'grid';
+    if (glossary) glossary.style.display = 'block';
+    if (footer) footer.style.display = 'block';
+    if (resultScreen) resultScreen.style.display = 'none';
+}
+
+function showTestResultScreen() {
+    const trainerPage = document.getElementById('trainerPage');
+    if (!trainerPage) return;
+    const header = trainerPage.querySelector('.app-header');
+    const controls = trainerPage.querySelector('.controls-bar');
+    const workspace = document.getElementById('workspace');
+    const glossary = trainerPage.querySelector('.glossary-wrap');
+    const footer = trainerPage.querySelector('.app-footer');
+    const resultScreen = document.getElementById('testResultScreen');
+    const scoreText = document.getElementById('finalScoreText');
+    const scoreDetails = document.getElementById('finalScoreDetails');
+    const maxScore = getMaxPracticeScore();
+
+    if (header) header.style.display = 'none';
+    if (controls) controls.style.display = 'none';
+    if (workspace) workspace.style.display = 'none';
+    if (glossary) glossary.style.display = 'none';
+    if (footer) footer.style.display = 'none';
+    if (resultScreen) resultScreen.style.display = 'flex';
+
+    if (scoreText) {
+        scoreText.textContent = `Вы набрали ${practiceScore.correct} из ${maxScore} баллов.`;
+    }
+    if (scoreDetails) {
+        scoreDetails.textContent = `Всего карточек в тесте: ${getFilteredLines().length}. В каждой карточке оцениваются две трансформации: Dota 2 и Dragon Blood.`;
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goToMainFromResult() {
+    testFinished = false;
+    currentMode = 'study';
+    currentLineIndex = 0;
+    practiceAnswered = false;
+    practiceScore = { correct: 0, total: 0 };
+    resetCardQuizState();
+    resetPracticeOrder();
+    restoreTrainerInterface();
+    returnToPreview();
+}
+
+function buildGlossary() {
+    const grid = document.getElementById('glossaryGrid');
+    GLOSSARY.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'glossary-card';
+        card.innerHTML = `
+            <div class="gcard-name">${item.name}</div>
+            <div class="gcard-desc">${item.desc}</div>
+            <div class="gcard-example">${item.example}</div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function toggleGlossary() {
+    glossaryOpen = !glossaryOpen;
+    document.getElementById('glossaryGrid').classList.toggle('visible', glossaryOpen);
+    document.getElementById('glossaryToggle').classList.toggle('open', glossaryOpen);
+}
+
+function getMethodDesc(method) {
+    const found = GLOSSARY.find(g => method.startsWith(g.name.split(' (')[0]));
+    return found ? found.desc : '';
+}
+
+function copyTranslation() {
+    const filtered = getFilteredLines();
+    const line = filtered[currentLineIndex];
+    if (!line) return;
+    const text = `Игра: ${line.gameTranslation} (${line.gameMethod})\nСериал: ${line.seriesTranslation} (${line.seriesMethod})`;
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.classList.add('copied');
+        btn.innerHTML = '<span>&#10003;</span> Скопировано';
+        showToast();
+        setTimeout(() => {
+            btn.classList.remove('copied');
+            btn.innerHTML = '<span>&#9112;</span> Копировать';
+        }, 2000);
+    }).catch(() => showToast('Ошибка копирования'));
+}
+
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg || 'Скопировано!';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+document.addEventListener('keydown', e => {
+    if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
+
+    if (currentMode === 'practice' && e.key === 'ArrowLeft') {
+        e.preventDefault();
+        return;
+    }
+
+    if (currentMode === 'practice' && e.key === 'ArrowRight') {
+        e.preventDefault();
+        if (studyCardAnswered.game && studyCardAnswered.series) handlePracticeNext();
+        return;
+    }
+
+    if (e.key === 'ArrowLeft') { e.preventDefault(); navigate(-1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); navigate(1); }
+    if (e.key === 'g' || e.key === 'г') toggleGlossary();
+});
+
+
+
+function openCharacterPreview() {
+    const previewPage = document.getElementById('previewPage');
+    const characterPreviewPage = document.getElementById('characterPreviewPage');
+    const trainerPage = document.getElementById('trainerPage');
+    if (previewPage) previewPage.style.display = 'none';
+    if (trainerPage) trainerPage.style.display = 'none';
+    if (characterPreviewPage) characterPreviewPage.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function closeCharacterPreview() {
+    const previewPage = document.getElementById('previewPage');
+    const characterPreviewPage = document.getElementById('characterPreviewPage');
+    const trainerPage = document.getElementById('trainerPage');
+    if (characterPreviewPage) characterPreviewPage.style.display = 'none';
+    if (trainerPage) trainerPage.style.display = 'none';
+    if (previewPage) previewPage.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showCharacterPanel(charId) {
+    document.querySelectorAll('.character-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.characterTab === charId);
+    });
+    document.querySelectorAll('.character-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.dataset.characterPanel === charId);
+    });
+}
+
+function startTrainer(charId = 'all') {
+    testFinished = false;
+    restoreTrainerInterface();
+    const previewPage = document.getElementById('previewPage');
+    const characterPreviewPage = document.getElementById('characterPreviewPage');
+    const trainerPage = document.getElementById('trainerPage');
+    if (previewPage) previewPage.style.display = 'none';
+    if (characterPreviewPage) characterPreviewPage.style.display = 'none';
+    if (trainerPage) trainerPage.style.display = 'block';
+    if (charId) {
+        const selector = document.getElementById('charSelect');
+        if (selector) selector.value = charId;
+        currentChar = charId;
+        currentLineIndex = 0;
+        practiceAnswered = false;
+        resetCardQuizState();
+    }
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+function returnToPreview() {
+    testFinished = false;
+    restoreTrainerInterface();
+    const previewPage = document.getElementById('previewPage');
+    const characterPreviewPage = document.getElementById('characterPreviewPage');
+    const trainerPage = document.getElementById('trainerPage');
+    if (trainerPage) trainerPage.style.display = 'none';
+    if (characterPreviewPage) characterPreviewPage.style.display = 'none';
+    if (previewPage) previewPage.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+buildGlossary();
+render();
+</script>
+</body>
+</html>
