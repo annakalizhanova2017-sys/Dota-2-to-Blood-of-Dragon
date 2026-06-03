@@ -36,7 +36,7 @@ body {
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .app-header {
@@ -130,8 +130,8 @@ body {
     font-size: 0.72rem;
 }
 .score-badge.visible { display: flex; }
-.score-num { font-weight: 500; color: var(--gold); font-size: 0.85rem; }
-.score-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.score-num { font-weight: 700; color: var(--gold); font-size: 1rem; }
+.score-label { color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.85rem; }
 
 .controls-bar {
     background: var(--surface);
@@ -147,7 +147,7 @@ body {
 .controls-right { display: flex; align-items: center; gap: 10px; }
 
 .ctrl-label {
-    font-size: 0.65rem;
+    font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--text-dim);
@@ -160,7 +160,7 @@ select {
     border-radius: var(--radius);
     padding: 6px 10px;
     font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.92rem;
     cursor: pointer;
     outline: none;
     transition: border-color var(--transition);
@@ -256,7 +256,7 @@ kbd {
 .card-id { display: flex; flex-direction: column; gap: 2px; }
 .card-name {
     font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--text);
     letter-spacing: 1px;
@@ -273,7 +273,7 @@ kbd {
 .quote {
     font-family: 'EB Garamond', 'Georgia', serif;
     font-style: italic;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     line-height: 1.55;
     color: var(--text);
     margin-bottom: 14px;
@@ -281,7 +281,7 @@ kbd {
 }
 
 .context-label {
-    font-size: 0.65rem;
+    font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--text-dim);
@@ -289,7 +289,7 @@ kbd {
     font-weight: 500;
 }
 .context-text {
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     color: var(--text-muted);
     line-height: 1.5;
 }
@@ -306,19 +306,33 @@ kbd {
 }
 .translation-text {
     font-family: 'EB Garamond', 'Georgia', serif;
-    font-size: 1rem;
+    font-size: 1.15rem;
     color: #f0e8d0;
     line-height: 1.5;
     text-align: justify;
     width: 100%;
 }
+.method-reveal-toggle {
+    background: transparent;
+    border: 1px dashed var(--border-light);
+    color: var(--text-dim);
+    border-radius: var(--radius);
+    padding: 4px 12px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Inter', sans-serif;
+}
+.method-reveal-toggle:hover { border-color: var(--gold-dim); color: var(--gold); }
+.method-reveal-toggle.revealed { border-color: var(--gold-dim); color: var(--gold-dim); }
+
 .method-tag {
     background: rgba(178, 34, 34, 0.18);
     color: #ffb0b0;
     border: 1px solid rgba(178, 34, 34, 0.4);
     border-radius: var(--radius);
-    padding: 3px 8px;
-    font-size: 0.65rem;
+    padding: 4px 10px;
+    font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     white-space: nowrap;
@@ -369,7 +383,7 @@ kbd {
 }
 .result-translation {
     font-family: 'EB Garamond', 'Georgia', serif;
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     color: #f0e8d0;
     line-height: 1.5;
 }
@@ -390,7 +404,7 @@ kbd {
 .copy-btn.copied { border-color: var(--green); color: var(--green-light); }
 
 .result-rationale {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     color: var(--text-muted);
     line-height: 1.55;
     border-top: 1px solid var(--border);
@@ -405,10 +419,23 @@ kbd {
     padding: 20px 24px;
     display: none;
 }
+
+.practice-hint-bar {
+    background: rgba(212,175,55,0.08);
+    border: 1px solid rgba(212,175,55,0.25);
+    border-radius: var(--radius);
+    padding: 10px 16px;
+    margin-bottom: 14px;
+    font-size: 0.88rem;
+    color: #d8c17a;
+    line-height: 1.5;
+    display: none;
+}
+.practice-hint-bar.visible { display: block; }
 .practice-panel.visible { display: block; }
 
 .practice-instruction {
-    font-size: 0.72rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;
     color: var(--gold-dim);
@@ -440,7 +467,7 @@ kbd {
 .method-option-btn:disabled { cursor: not-allowed; opacity: 0.6; }
 
 .practice-feedback {
-    font-size: 0.82rem;
+    font-size: 0.92rem;
     color: var(--text-muted);
     padding: 10px 14px;
     border-radius: var(--radius);
@@ -478,7 +505,7 @@ kbd {
 }
 .card-quiz.visible { display: block; }
 .card-quiz-label {
-    font-size: 0.62rem;
+    font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--text-dim);
@@ -488,14 +515,14 @@ kbd {
 .multi-answer-note {
     display: none;
     margin: 0 0 10px;
-    padding: 7px 10px;
+    padding: 8px 12px;
     border: 1px solid rgba(212, 175, 55, 0.35);
     border-left: 3px solid var(--gold-dim);
     border-radius: var(--radius);
     background: rgba(212, 175, 55, 0.08);
     color: #d8c17a;
-    font-size: 0.72rem;
-    line-height: 1.45;
+    font-size: 0.88rem;
+    line-height: 1.5;
 }
 .multi-answer-note.visible { display: block; }
 .card-method-options {
@@ -509,8 +536,8 @@ kbd {
     border: 1px solid var(--border);
     color: var(--text-muted);
     border-radius: var(--radius);
-    padding: 5px 11px;
-    font-size: 0.72rem;
+    padding: 7px 13px;
+    font-size: 0.85rem;
     cursor: pointer;
     transition: var(--transition);
     font-family: 'Inter', sans-serif;
@@ -526,7 +553,7 @@ kbd {
 .card-method-btn.reveal-correct { background: rgba(45,122,58,0.15); border-color: var(--green); color: #7edf93; border-style: dashed; }
 .card-method-btn:disabled { cursor: not-allowed; opacity: 0.6; }
 .card-quiz-feedback {
-    font-size: 0.78rem;
+    font-size: 0.9rem;
     color: var(--text-muted);
     padding: 8px 12px;
     border-radius: var(--radius);
@@ -543,16 +570,17 @@ kbd {
     border: 1px solid var(--gold-dim);
     color: var(--gold);
     border-radius: var(--radius);
-    padding: 4px 12px;
-    font-size: 0.68rem;
+    padding: 6px 14px;
+    font-size: 0.82rem;
     cursor: pointer;
     transition: var(--transition);
     font-family: 'Inter', sans-serif;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-right: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
 }
-.card-quiz-submit:hover:not(:disabled) { background: rgba(212,175,55,0.2); border-color: var(--gold); }
+.card-quiz-submit:hover:not(:disabled) { background: rgba(212,175,55,0.25); border-color: var(--gold); color: #fff; }
 .card-quiz-submit:disabled { opacity: 0.35; cursor: not-allowed; }
 .card-quiz-reveal {
     background: transparent;
@@ -612,9 +640,9 @@ kbd {
     border-radius: var(--radius);
     padding: 14px 16px;
 }
-.gcard-name { font-size: 0.78rem; font-weight: 500; color: var(--gold); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
-.gcard-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
-.gcard-example { font-size: 0.72rem; color: var(--text-dim); font-style: italic; margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--border); }
+.gcard-name { font-size: 0.92rem; font-weight: 500; color: var(--gold); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.gcard-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
+.gcard-example { font-size: 0.82rem; color: var(--text-dim); font-style: italic; margin-top: 5px; padding-top: 5px; border-top: 1px solid var(--border); }
 
 .empty-state {
     grid-column: 1 / -1;
@@ -1186,6 +1214,21 @@ kbd {
 }
 
 </style>
+
+<script>
+// Доступна сразу при загрузке страницы — нужна для onerror на img
+function makeAvatar(charId, side) {
+    var color     = side === 'game' ? '%23801515' : '%23806010';
+    var textColor = side === 'game' ? '%23ffaaaa' : '%23ffd070';
+    var initMap   = {
+        davion:  { game: 'DK', series: 'DA' },
+        invoker: { game: 'IN', series: 'CA' },
+        mirana:  { game: 'MI', series: 'PM' }
+    };
+    var initials = (initMap[charId] && initMap[charId][side]) ? initMap[charId][side] : '??';
+    return "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='54'%3E%3Ccircle cx='27' cy='27' r='27' fill='" + color + "'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='" + textColor + "' font-size='16' font-family='Arial' font-weight='bold'%3E" + initials + "%3C/text%3E%3C/svg%3E";
+}
+</script>
 </head>
 <body>
 <section class="preview-page" id="previewPage">
@@ -1420,8 +1463,8 @@ kbd {
             <span class="score-num" id="scoreDisplay">0 / 0</span>
         </div>
         <div class="mode-switch">
-            <button class="mode-btn active" id="studyModeBtn" onclick="setMode('study')">Обучение</button>
-            <button class="mode-btn" id="practiceModeBtn" onclick="setMode('practice')">Тест</button>
+            <button class="mode-btn active" id="studyModeBtn" onclick="setMode('study')" title="Изучение трансформаций: цитата → перевод → метод → анализ">📖 Обучение</button>
+            <button class="mode-btn" id="practiceModeBtn" onclick="setMode('practice')" title="Тест: определите трансформацию самостоятельно и проверьте ответ">✏️ Тест</button>
         </div>
     </div>
 </header>
@@ -1441,16 +1484,17 @@ kbd {
             <option value="">Все трансформации</option>
             <option value="Модуляция">Модуляция</option>
             <option value="Компенсация">Компенсация</option>
-            <option value="Синтаксическое уподобление">Синтаксическое уподобление</option>
-            <option value="Транскрипция">Транскрипция</option>
+            <option value="Калькирование">Калькирование</option>
+            <option value="Генерализация">Генерализация</option>
             <option value="Конкретизация">Конкретизация</option>
             <option value="Опущение">Опущение</option>
-            <option value="Генерализация">Генерализация</option>
-            <option value="Калькирование">Калькирование</option>
-            <option value="Замена формы слова">Замена формы слова</option>
-            <option value="Целостное преобразование">Целостное преобразование</option>
-            <option value="Замена типа предложения">Замена типа предложения</option>
-            <option value="Добавление">Добавление</option>
+            <option value="Перестановка">Перестановка</option>
+            <option value="Транскрипция">Транскрипция</option>
+            <option value="Синтаксическое уподобление">Синтаксическое уподобление</option>
+            <option value="Замена формы предложения">Замена формы предложения</option>
+            <option value="Антонимический перевод">Антонимический перевод</option>
+            <option value="Описательный перевод">Описательный перевод</option>
+            <option value="Членение предложения">Членение предложения</option>
         </select>
     </div>
     <div class="controls-right">
@@ -1481,15 +1525,21 @@ kbd {
             <div class="context-label">Перевод</div>
             <div class="translation-row">
                 <div class="translation-text" id="gameTranslationText"></div>
-                <div class="method-tags" id="gameMethodTag"></div>
+            </div>
+            <div class="method-reveal-row" id="gameMethodRevealRow" style="margin-top:10px;">
+                <button class="method-reveal-toggle" id="gameMethodRevealBtn" onclick="toggleMethodReveal('game')" title="Показать / скрыть тип трансформации">Показать трансформацию</button>
+                <div class="method-tags" id="gameMethodTag" style="display:none;margin-top:8px;"></div>
             </div>
         </div>
         <div class="card-quiz" id="gameCardQuiz">
-            <div class="card-quiz-label">Определите трансформацию (Игра)</div>
+            <div class="card-quiz-label">🎯 Тест: Выберите трансформацию(и) для реплики из Dota 2</div>
             <div class="multi-answer-note" id="gameMultiAnswerNote"></div>
             <div class="card-method-options" id="gameCardOptions"></div>
             <div class="card-quiz-feedback" id="gameCardFeedback"></div>
-            <button class="card-quiz-reveal" id="gameCardRevealBtn" onclick="revealCardAnswer('game')">Показать ответ</button>
+            <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+                <button class="card-quiz-submit" id="gameCardSubmitBtn" onclick="checkCardAnswer('game')" disabled>✓ Проверить</button>
+                <button class="card-quiz-reveal" id="gameCardRevealBtn" onclick="revealCardAnswer('game')">Показать ответ</button>
+            </div>
         </div>
     </div>
 
@@ -1512,15 +1562,21 @@ kbd {
             <div class="context-label">Перевод</div>
             <div class="translation-row">
                 <div class="translation-text" id="seriesTranslationText"></div>
-                <div class="method-tags" id="seriesMethodTag"></div>
+            </div>
+            <div class="method-reveal-row" id="seriesMethodRevealRow" style="margin-top:10px;">
+                <button class="method-reveal-toggle" id="seriesMethodRevealBtn" onclick="toggleMethodReveal('series')" title="Показать / скрыть тип трансформации">Показать трансформацию</button>
+                <div class="method-tags" id="seriesMethodTag" style="display:none;margin-top:8px;"></div>
             </div>
         </div>
         <div class="card-quiz" id="seriesCardQuiz">
-            <div class="card-quiz-label">Определите трансформацию (Сериал)</div>
+            <div class="card-quiz-label">🎯 Тест: Выберите трансформацию(и) для реплики из Dragon Blood</div>
             <div class="multi-answer-note" id="seriesMultiAnswerNote"></div>
             <div class="card-method-options" id="seriesCardOptions"></div>
             <div class="card-quiz-feedback" id="seriesCardFeedback"></div>
-            <button class="card-quiz-reveal" id="seriesCardRevealBtn" onclick="revealCardAnswer('series')">Показать ответ</button>
+            <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+                <button class="card-quiz-submit" id="seriesCardSubmitBtn" onclick="checkCardAnswer('series')" disabled>✓ Проверить</button>
+                <button class="card-quiz-reveal" id="seriesCardRevealBtn" onclick="revealCardAnswer('series')">Показать ответ</button>
+            </div>
         </div>
     </div>
 
@@ -1530,10 +1586,14 @@ kbd {
     </div>
 
     <div class="analysis-wrap" id="analysisWrap">
+        <div class="practice-hint-bar" id="practiceHintBar">📋 <strong>Инструкция:</strong> Посмотрите на цитату выше и её перевод. Определите, какой тип трансформации по Комиссарову применил переводчик. Если трансформаций несколько — выберите все. Затем нажмите <strong>«Ответить»</strong>.</div>
         <div class="result-panel" id="resultPanel">
+            <div style="margin-bottom:12px;padding:8px 12px;background:rgba(212,175,55,0.07);border:1px solid rgba(212,175,55,0.2);border-radius:var(--radius);font-size:0.88rem;color:#d8c17a;">
+                📖 <strong>Режим обучения:</strong> Прочитайте цитату, изучите перевод. Нажмите <em>«Показать трансформацию»</em> на карточке, чтобы увидеть ответ. Ниже — анализ кроссмедийного перехода.
+            </div>
             <div class="result-top">
                 <div style="flex:1; min-width:0;">
-                    <div class="result-label">Комментарий</div>
+                    <div class="result-label" id="resultLabel">Кроссмедийный сдвиг восприятия — Комментарий к переводу</div>
                     <div class="result-translation" id="resultTranslation"></div>
                 </div>
                 <button class="copy-btn" id="copyBtn" onclick="copyTranslation()">
@@ -1553,7 +1613,7 @@ kbd {
             </div>
         </div>
         <div id="practiceNextWrap" class="practice-next-wrap">
-            <button class="practice-skip-btn test-answer-btn" id="practiceSubmitBtn" onclick="submitBothAnswers()" disabled>Ответить</button>
+            <button class="practice-skip-btn test-answer-btn" id="practiceSubmitBtn" onclick="submitBothAnswers()" disabled title="Выберите варианты в обеих карточках, затем нажмите Ответить">✓ Ответить</button>
             <button class="practice-skip-btn test-next-btn" id="practiceNextBtn" onclick="handlePracticeNext()">Следующая карточка →</button>
         </div>
     </div>
@@ -1593,6 +1653,9 @@ kbd {
 </div>
 
 <script>
+// ═══════════════════════════════════════════════════════════
+//  ДАННЫЕ: ПЕРСОНАЖИ И РЕПЛИКИ
+// ═══════════════════════════════════════════════════════════
 const CHARACTERS = {
     davion: {
         gameName: 'Dragon Knight',
@@ -1603,64 +1666,64 @@ const CHARACTERS = {
         seriesInitials: 'DA',
         lines: [
             {
-                game: '"You know too many things. Things you have no good reason to know."',
-                series: '"You know too many things. Things you have no good reason to know."',
-                gameContext: 'Игровая реплика: предупреждение противнику — герой подозревает, что тот владеет запретным знанием.',
-                seriesContext: 'Сериальная версия: та же реплика в нарративном контексте — напряжённый диалог с персонажем, знающим слишком много.',
-                gameTranslation: '«Тебе ведомо слишком многое. То, о чём ты не должен был знать.»',
-                gameMethod: 'Модуляция',
-                seriesTranslation: '«Слишком много тайн тебе открыто. И тех, что ты не должен был узнать.»',
-                seriesMethod: 'Модуляция, Конкретизация',
-                perceptionShift: 'В игре акцент на количестве знания («слишком многое»). В сериале — на его характере («тайны»), что создаёт более интригующий образ. Конкретизация превращает абстрактное знание в запретные секреты.',
-                method: 'Модуляция'
+                game: '"The dragon comes for war."',
+                series: '"Your violence is like kindness in the shadow of my rage."',
+                gameContext: 'Игровая реплика Dragon Knight: герой движется в бой — краткое, торжественное объявление намерения.',
+                seriesContext: 'Сериальный Дэвион демонстрирует подавляющую мощь: ярость героя настолько велика, что жестокость противника меркнет на её фоне.',
+                gameTranslation: '«Дракон идёт на войну.»',
+                gameMethod: 'Калькирование',
+                seriesTranslation: '«Твоя жестокость меркнет перед моей яростью — она почти что доброта.»',
+                seriesMethod: 'Модуляция, Замена формы предложения, Компенсация',
+                perceptionShift: 'Игровая реплика — прямое, ритуальное объявление боевого намерения (калька сохраняет структуру). В сериале та же сила выражается через экспрессивное сравнение: компенсация за потерю метафоры «в тени» восполняется глаголом «меркнет». Кроссмедийный переход: от торжественной декларации к психологическому давлению.',
+                method: 'Калькирование'
             },
             {
                 game: '"By the honor of the ancients."',
-                series: '"Невероятно… Я вновь ощущаю себя собой. Тем Дэвионом, которого я почти забыл."',
-                gameContext: 'В игре герой опирается на кодекс чести и традицию древних воинов.',
-                seriesContext: 'В сериале — момент возвращения к себе: герой переживает эмоциональное воссоединение со своей прежней идентичностью.',
-                gameTranslation: '«Честью древних клянусь.»',
-                gameMethod: 'Адаптация',
-                seriesTranslation: '«Невероятно… Я вновь ощущаю себя собой. Тем Дэвионом, которого я почти забыл.»',
-                seriesMethod: 'Модуляция, Добавление',
-                perceptionShift: 'Игровая реплика апеллирует к коллективной памяти и ритуалу — «честь древних» создаёт ощущение мифологической глубины. Сериал заменяет её личным переживанием возвращённой идентичности — от ритуала к психологии.',
-                method: 'Адаптация'
+                series: '"Davion the Dragon Knight, and I\'m him. And for the longest time, I thought I was just Davion..."',
+                gameContext: 'Игровая клятва Dragon Knight: апелляция к кодексу чести и традиции древних воинов.',
+                seriesContext: 'Осознание двойственной идентичности: герой принимает своё полное имя и роль Рыцаря Дракона, отказываясь от прежнего «просто Дэвион».',
+                gameTranslation: '«Во имя древних.»',
+                gameMethod: 'Модуляция',
+                seriesTranslation: '«Дэвион, Рыцарь Дракона — вот кто я. А раньше я думал, что я всего лишь Дэвион.»',
+                seriesMethod: 'Калькирование, Генерализация, Замена формы предложения',
+                perceptionShift: 'В игре — ритуальная апелляция к коллективной чести (модуляция: «honor» → «во имя»). В сериале — личное экзистенциальное заявление о себе. Калька сохраняет «Рыцарь Дракона», а генерализация передаёт «for the longest time» как «раньше». Переход от кодекса к психологии.',
+                method: 'Модуляция'
             },
             {
                 game: '"I unsheathe the Wyrmblade."',
-                series: '"Your violence is like kindness in the shadow of my rage."',
-                gameContext: 'Ритуальный жест воина: извлечение легендарного клинка как символ начала битвы.',
-                seriesContext: 'Демонстрация подавляющей силы: ярость Дэвиона настолько велика, что жестокость противника меркнет на её фоне.',
+                series: '"You know too many things. Things you have no good reason to know."',
+                gameContext: 'Ритуальный жест: извлечение легендарного клинка Вирмблэйд как символ начала битвы.',
+                seriesContext: 'Предостережение о запретном знании — сдержанная, но угрожающая реплика в напряжённом диалоге.',
                 gameTranslation: '«Клинок Дракона жаждет крови.»',
-                gameMethod: 'Компенсация',
-                seriesTranslation: '«Твоя жестокость меркнет перед моей яростью – она почти что доброта.»',
-                seriesMethod: 'Стилистическая модуляция',
-                perceptionShift: 'Игра делает акцент на ритуале и символике оружия. Сериал смещает фокус на внутреннее состояние — ярость как мерило силы. Адаптация меняет внешний образ воина на психологический портрет.',
+                gameMethod: 'Модуляция, Компенсация',
+                seriesTranslation: '«Слишком много тайн тебе открыто. И тех, что ты не должен был узнать.»',
+                seriesMethod: 'Конкретизация, Модуляция, Замена формы предложения',
+                perceptionShift: 'В игре конкретное действие «обнажить клинок» трансформируется в метафору через компенсацию («жаждет крови»), а имя Wyrmblade передаётся модуляцией. В сериале абстрактное «things» конкретизируется в «тайны», а активная конструкция «you know» переходит в пассивную «тебе открыто». Переход: от символики оружия к символике знания.',
                 method: 'Компенсация'
             },
             {
                 game: '"I need no steed."',
-                series: '"Davion the Dragon Knight, and I\'m him. And for the longest time, I thought I was just Davion..."',
-                gameContext: 'Самодостаточность воина: Dragon Knight не нуждается в лошади, полагаясь лишь на собственную силу.',
-                seriesContext: 'Осознание двойственной идентичности: герой принимает своё новое «я» — не просто Дэвион, а Рыцарь Дракона.',
+                series: '"It\'s so strange, I feel like me. The me I\'ve always been..."',
+                gameContext: 'Самодостаточность воина: Dragon Knight полагается лишь на собственную силу и не нуждается в коне.',
+                seriesContext: 'Момент возвращения к себе — герой переживает эмоциональное воссоединение со своей прежней идентичностью после долгого внутреннего конфликта.',
                 gameTranslation: '«И без коня управлюсь.»',
-                gameMethod: 'Модуляция',
-                seriesTranslation: '«Дэвион, Рыцарь Дракона – вот кто я. А раньше я думал, что я всего лишь Дэвион.»',
-                seriesMethod: 'Модуляция',
-                perceptionShift: 'Краткая игровая реплика о физической самодостаточности трансформируется в развёрнутый монолог об идентичности. Кроссмедийный переход превращает боевое хвастовство в экзистенциальное осмысление себя.',
-                method: 'Модуляция'
+                gameMethod: 'Модуляция, Генерализация, Замена формы предложения',
+                seriesTranslation: '«Невероятно… Я вновь ощущаю себя собой. Тем Дэвионом, которого я почти забыл.»',
+                seriesMethod: 'Модуляция, Конкретизация, Замена формы предложения',
+                perceptionShift: 'Краткая игровая реплика о физической самодостаточности (модуляция: негация → способность; генерализация: «steed» → «конь») трансформируется в психологическое осознание себя. В сериале «strange» → «невероятно» (усиление через модуляцию), «The me» → «Тем Дэвионом» (конкретизация). Переход: от тела к душе.',
+                method: 'Генерализация'
             },
             {
                 game: '"I\'ve killed dragons less deserving of death."',
                 series: '"I wanted blood once. I wanted your blood. You suffered for my rage."',
-                gameContext: 'Угроза противнику: даже драконы, заслуживающие смерти меньше, уже пали от руки героя.',
-                seriesContext: 'Признание вины и осознание прошлой жестокости: герой берёт ответственность за причинённую боль.',
+                gameContext: 'Угроза противнику: даже драконы, заслуживающие смерти меньше других, уже пали от руки Dragon Knight.',
+                seriesContext: 'Признание вины: Дэвион берёт на себя ответственность за причинённую боль и осознаёт, что некогда жаждал крови.',
                 gameTranslation: '«Моя рука разила драконов и за меньшее.»',
-                gameMethod: 'Модуляция',
+                gameMethod: 'Модуляция, Генерализация, Компенсация',
                 seriesTranslation: '«Я жаждал крови, и твоей в том числе. Ты пострадал, пока я был во власти ярости.»',
-                seriesMethod: 'Адаптация',
-                perceptionShift: 'Игра использует угрозу как демонстрацию силы — взгляд снаружи, на врага. Сериал разворачивает ту же тему внутрь — признание вины и сострадание к жертве. Слом восприятия: из агрессора в рефлексирующего героя.',
-                method: 'Адаптация'
+                seriesMethod: 'Замена формы предложения, Модуляция, Компенсация',
+                perceptionShift: 'В игре — угроза с позиции силы: «I\'ve killed» → «моя рука разила» (модуляция + компенсация усиливают героическую дистанцию). В сериале то же «жажда крови» переходит в признание вины: «suffered for my rage» → «пока я был во власти ярости» (модуляция смещает акцент с последствия на состояние). Слом: агрессор → кающийся.',
+                method: 'Компенсация'
             }
         ]
     },
@@ -1675,62 +1738,62 @@ const CHARACTERS = {
             {
                 game: '"Oh, they\'ll rue the day they crossed me!"',
                 series: '"What cannot be named cannot be known. What cannot be known, cannot be hurt."',
-                gameContext: 'Гнев и угроза расправы — эмоциональный всплеск нарцисса, которому осмелились перечить.',
-                seriesContext: 'Философское рассуждение о природе боли и знания — Карл как архимаг-мыслитель.',
+                gameContext: 'Эмоциональный взрыв нарцисса: Инвокер угрожает тем, кто осмелился ему перечить.',
+                seriesContext: 'Философское рассуждение о природе боли и непознаваемого — Карл говорит как архимаг-мыслитель.',
                 gameTranslation: '«Ох, они пожалеют о том дне, когда перешли мне дорогу!»',
-                gameMethod: 'Модуляция',
+                gameMethod: 'Калькирование, Модуляция',
                 seriesTranslation: '«Невыразимое не познаётся. Непознанное не страдает.»',
-                seriesMethod: 'Модуляция',
-                perceptionShift: 'Эмоциональный взрыв мести в игре противопоставлен холодной философской дистанции в сериале. Один и тот же персонаж: в игре — оскорблённый нарцисс, в сериале — бесстрастный мыслитель. Кроссмедийная адаптация обнажает разрыв между аффектом и интеллектом.',
+                seriesMethod: 'Модуляция, Замена формы предложения',
+                perceptionShift: 'В игре «rue the day» → «пожалеют о том дне» (модуляция снижает стилистику), «crossed me» → «перешли мне дорогу» (фразеологическая модуляция). «Oh» калькируется как «Ох». В сериале придаточные конструкции трансформируются в субстантивированные формы (замена типа предложения), а «hurt» → «страдает» (модуляция: внешнее → внутреннее). Переход: от аффекта к философской дистанции.',
                 method: 'Модуляция'
             },
             {
                 game: '"I\'ll luck upon you."',
                 series: '"That\'s not how this story ends. This is how every story ends. In death. In regret."',
-                gameContext: 'Самоуверенная насмешка: встреча с Инвокером — «удача» для противника, которую тот не оценит.',
+                gameContext: 'Самоуверенная насмешка Инвокера: встреча с ним преподносится как «удача» для неосторожного противника.',
                 seriesContext: 'Фаталистическое пророчество: Карл провозглашает неизбежность смерти и сожаления как финала любой истории.',
-                gameTranslation: '«Сообщаю, что дело сделано!»',
-                gameMethod: 'Модуляция',
+                gameTranslation: '«Будь проклят.»',
+                gameMethod: 'Антонимический перевод',
                 seriesTranslation: '«Эта история закончится не так. Так заканчиваются все истории: смертью. Сожалением.»',
-                seriesMethod: 'Синтаксическое уподобление',
-                perceptionShift: 'Игровая реплика — лёгкое, ироничное превосходство. Сериальная — тяжёлый экзистенциальный приговор. Переход от иронии к трагизму показывает, как медиаформат меняет глубину персонажа.',
-                method: 'Синтаксическое уподобление'
+                seriesMethod: 'Синтаксическое уподобление, Замена формы предложения',
+                perceptionShift: 'В игре нейтральная косвенная угроза «luck upon» полностью переосмыслена в прямое проклятие (антонимический перевод: позитивная «удача» → «будь проклят»). В сериале синтаксическое уподобление сохраняет рублёную ритмику оригинала, а предложные конструкции «In death. In regret» → «смертью. Сожалением» передаются через замену формы. Переход: от иронии к трагическому фатализму.',
+                method: 'Антонимический перевод'
             },
             {
-                game: '"It\'s to me to inform you that this one is in the bag."',
+                game: '"It falls to me to inform you that this one is in the bag."',
                 series: '"Foulfell shares the same structure as the rest of reality. It still requires light, gravity, substance."',
-                gameContext: 'Самодовольное объявление победы — Инвокер констатирует очевидное с нарочитой торжественностью.',
+                gameContext: 'Самодовольное торжественное объявление победы — Инвокер констатирует исход боя с нарочитой церемонностью.',
                 seriesContext: 'Научно-магический анализ: Карл описывает измерение Фоулфелл как исследователь, оперируя физическими категориями.',
-                gameTranslation: '«Будь проклят.»',
-                gameMethod: 'Модуляция',
+                gameTranslation: '«Сообщаю, что дело сделано!»',
+                gameMethod: 'Модуляция, Замена формы предложения',
                 seriesTranslation: '«Фоулфелл имеет ту же структуру, что и остальная реальность. Ему всё ещё нужны свет, гравитация, материя.»',
-                seriesMethod: 'Транскрипция, Синтаксическое уподобление',
-                perceptionShift: 'Игра: Инвокер — самовлюблённый победитель. Сериал: Карл — холодный учёный-маг. Тот же интеллект, но направленный не на самолюбование, а на познание. Адаптация превращает нарцисса в архетип мудреца.',
+                seriesMethod: 'Транскрипция, Синтаксическое уподобление, Замена формы предложения',
+                perceptionShift: 'В игре формальная конструкция «It falls to me to inform you» редуцируется до «Сообщаю» (замена типа предложения), а идиома «in the bag» → «дело сделано» (модуляция). В сериале «Foulfell» транскрибируется, синтаксис сохраняется, «requires» → «нужны» (замена формы предложения с личной на безличную). Переход: от нарциссического торжества к холодному анализу.',
                 method: 'Транскрипция'
             },
             {
                 game: '"Like a match already dim and damp, your mind snuffs out."',
                 series: '"Creation is a delicate thing. It took hundreds of iterations simply to learn how to make a stable universe."',
-                gameContext: 'Поэтическая насмешка над слабостью разума противника — метафора угасающей спички.',
-                seriesContext: 'Карл раскрывает себя как демиурга, участвовавшего в создании вселенных — масштаб знания за пределами человеческого.',
+                gameContext: 'Поэтическая насмешка над интеллектом противника: метафора угасающей сырой спички как символ слабого разума.',
+                seriesContext: 'Карл раскрывает себя как демиурга — участника создания вселенных, обладающего знанием космического масштаба.',
                 gameTranslation: '«Твой ум гаснет, как сырая спичка.»',
-                gameMethod: 'Модуляция, Опущение',
+                gameMethod: 'Модуляция, Опущение, Перестановка',
                 seriesTranslation: '«Сотворение мира — процесс тонкий. Сотни циклов потребовались, чтобы постичь создание устойчивой вселенной.»',
-                seriesMethod: 'Конкретизация',
-                perceptionShift: 'Игровая метафора унижает конкретного противника. Сериальная реплика разворачивает тот же интеллект в космический масштаб. Слом восприятия: от высокомерия над слабым к величию перед бесконечностью.',
+                seriesMethod: 'Конкретизация, Модуляция, Замена формы предложения',
+                perceptionShift: 'В игре сложная метафора упрощается: «dim and damp» → «сырая» (опущение одного компонента), порядок частей меняется (перестановка), «snuffs out» → «гаснет» (модуляция). В сериале «Creation» → «Сотворение мира» (конкретизация), «delicate thing» → «процесс тонкий» (модуляция), «iterations» → «циклов» (модуляция с философским окрасом). Переход: от насмешки к демиургическому величию.',
                 method: 'Опущение'
             },
             {
                 game: '"I am a beacon of knowledge blazing out across a black sea of ignorance."',
                 series: '"Stories are stories. Dead is dead. No one can change that. Not even I can change that."',
-                gameContext: 'Пышная самохарактеристика: Инвокер — свет знания в океане невежества.',
-                seriesContext: 'Карл признаёт границы своего могущества — даже он не властен над смертью.',
+                gameContext: 'Пышная самохарактеристика Инвокера: он — маяк знания, сияющий над океаном невежества.',
+                seriesContext: 'Карл признаёт границы своего могущества — даже он не властен изменить смерть и сожаление.',
                 gameTranslation: '«Я — маяк мудрости в океане невежества.»',
-                gameMethod: 'Опущение, Модуляция, Генерализация',
+                gameMethod: 'Калькирование, Конкретизация, Опущение, Замена формы предложения',
                 seriesTranslation: '«Сказки — это сказки. Мёртвый — мёртв. Ничто этого не изменит. Даже я бессилен.»',
-                seriesMethod: 'Синтаксическое уподобление, Компенсация',
-                perceptionShift: 'Самопровозглашённое всемогущество в игре разбивается о признание бессилия в сериале. Кроссмедийная адаптация создаёт наиболее драматичный слом: из абсолютного нарцисса — в персонажа с трагической уязвимостью.',
-                method: 'Генерализация'
+                seriesMethod: 'Синтаксическое уподобление, Модуляция, Компенсация',
+                perceptionShift: 'В игре «beacon of knowledge» → «маяк мудрости» (конкретизация), «blazing out» опускается (опущение), «black sea» → «океан» (генерализация через замену формы). В сериале синтаксическое уподобление сохраняет рублёный ритм, «No one can change that» → «Ничто этого не изменит» (модуляция: агент → безличность), «Not even I can change that» → «Даже я бессилен» (компенсация сжимает смысл). Переход: от всемогущества к трагическому бессилию.',
+                method: 'Калькирование'
             }
         ]
     },
@@ -1745,66 +1808,68 @@ const CHARACTERS = {
             {
                 game: '"Nothing stirs the blood like battle. It\'s better than catnip!"',
                 series: '"The brightest lights cast the darkest shadows."',
-                gameContext: 'Азарт битвы и лёгкий юмор — воительница сравнивает боевой задор с кошачьей радостью.',
+                gameContext: 'Азарт боевой страсти: Мирана сравнивает боевой запал с кошачьей мятой — энергично и с юмором.',
                 seriesContext: 'Философское наблюдение о природе света и тьмы — Принцесса Луны как персонаж с трагическим мировоззрением.',
                 gameTranslation: '«Ничто не горячит кровь лучше битвы. Она лучше, чем кошачья мята!»',
-                gameMethod: 'Калькирование, Модуляция',
+                gameMethod: 'Модуляция, Замена формы предложения',
                 seriesTranslation: '«Ослепительный свет порождает непроглядную тьму.»',
-                seriesMethod: 'Модуляция, Замена формы слова',
-                perceptionShift: 'Игровой азарт и телесная радость битвы сменяются холодной философией контрастов. Кроссмедийная адаптация превращает импульсивную воительницу в мыслителя, осознавшего цену каждой победы.',
+                seriesMethod: 'Модуляция, Замена формы предложения',
+                perceptionShift: 'В игре «stirs the blood» → «горячит кровь» (модуляция: образ сохраняется, но глагол динамичнее), «like battle» → «лучше битвы» (замена типа конструкции). В сериале «cast the darkest shadows» → «порождает непроглядную тьму» (модуляция: визуальный образ → каузальный), множественное число → единственное (замена формы). Переход: от телесной радости битвы к холодной философии контрастов.',
                 method: 'Модуляция'
             },
             {
                 game: '"Tuck your tail and run, you mutt!"',
                 series: '"You will not be happy when you awaken, Davion the Dragon Knight. But you\'ll live."',
-                gameContext: 'Насмешка над противником в бою — агрессивный вызов, унижение врага.',
-                seriesContext: 'Сдержанная забота о раненом союзнике — Принцесса Луны говорит жёстко, но с состраданием.',
-                gameTranslation: '«Беги, поджав хвост, щенок.»',
-                gameMethod: 'Модуляция, Генерализация',
+                gameContext: 'Насмешка над бегущим врагом — агрессивный вызов, унижение противника в бою.',
+                seriesContext: 'Сдержанное предупреждение раненому союзнику — Принцесса Луны говорит жёстко, но с состраданием.',
+                gameTranslation: '«Беги, поджав хвост, щенок!»',
+                gameMethod: 'Генерализация, Замена формы предложения',
                 seriesTranslation: '«Когда очнёшься, Дэвион, Рыцарь Дракона, ты не обрадуешься. Но будешь жить.»',
-                seriesMethod: 'Синтаксическое уподобление, Компенсация',
-                perceptionShift: 'Агрессия, направленная на врага в игре, трансформируется в сдержанную заботу о союзнике в сериале. Один голос — два полюса: разрушение и защита. Слом восприятия через смену адресата реплики.',
+                seriesMethod: 'Калькирование, Модуляция, Перестановка, Синтаксическое уподобление',
+                perceptionShift: 'В игре «mutt» → «щенок» (генерализация: монгрель → любой молодой пёс), два координированных императива → императив + деепричастие (замена формы предложения). В сериале «Dragon Knight» калькируется, «not be happy» → «не обрадуешься» (модуляция: состояние → реакция), придаточное времени переставляется в начало (перестановка), «But you\'ll live» сохраняется синтаксическим уподоблением. Переход: от агрессии к сдержанной заботе.',
                 method: 'Генерализация'
             },
             {
                 game: '"Pathetic whelp."',
                 series: '"Never harm me? It was you, wasn\'t it? You murdered my parents. You took them from me. You took everything from me!"',
-                gameContext: 'Краткое презрительное оскорбление поверженного противника.',
-                seriesContext: 'Эмоциональный срыв — обвинение предателя в убийстве родителей, крик боли и утраты.',
+                gameContext: 'Краткое презрительное оскорбление поверженного противника — два слова, исчерпывающее отношение.',
+                seriesContext: 'Эмоциональный срыв: обвинение предателя в убийстве родителей — крик боли, утраты и гнева.',
                 gameTranslation: '«Жалкий молокосос.»',
-                gameMethod: 'Компенсация, Модуляция',
-                seriesTranslation: '«Ты же обещал меня не трогать... Это был ты, да? Ты убил моих родителей. Отнял всё!»',
-                seriesMethod: 'Модуляция, Компенсация',
-                perceptionShift: 'Двухсловное презрение в игре против развёрнутого крика боли в сериале. Кроссмедийный переход обнажает за холодной воительницей травмированного человека — слом от силы к уязвимости.',
-                method: 'Компенсация'
+                gameMethod: 'Модуляция',
+                seriesTranslation: '«Ты же обещал меня не трогать… Это был ты, да? Ты убил моих родителей. Отнял всё!»',
+                seriesMethod: 'Описательный перевод, Членение предложения',
+                perceptionShift: 'В игре «whelp» → «молокосос» (модуляция: зооморфный образ → возрастной пейоратив). В сериале эллиптичная «Never harm me?» поясняется как «Ты же обещал меня не трогать» (описательный перевод), повторяющиеся обвинения сжимаются через членение предложений с опущением повторного подлежащего. Переход: от холодного превосходства к уязвимости.',
+                method: 'Модуляция'
             },
             {
                 game: '"The stars are in alignment, and our victory is certain."',
                 series: '"Yes, I\'m beautiful. But my arrows are even more precise — keep it in mind for the future."',
-                gameContext: 'Торжественное пророчество победы — Мирана черпает уверенность в небесных знаках.',
-                seriesContext: 'Ироничное самоутверждение — Принцесса Луны демонстрирует силу через контраст красоты и смертоносности.',
+                gameContext: 'Торжественное пророчество победы — Мирана черпает уверенность в небесных знамениях.',
+                seriesContext: 'Ироничная самопрезентация: Принцесса Луны демонстрирует силу через контраст красоты и смертоносной точности.',
                 gameTranslation: '«Звёзды встали как надо, победа будет за нами.»',
-                gameMethod: 'Компенсация, Модуляция',
+                gameMethod: 'Модуляция, Замена формы предложения',
                 seriesTranslation: '«Я прекрасна, согласна. Но мои стрелы куда точнее — не забывай об этом.»',
-                seriesMethod: 'Модуляция, Компенсация',
-                perceptionShift: 'Мистическая уверенность через звёзды в игре уступает личной, иронической уверенности в сериале. Источник силы смещается: от космоса — к самой себе. Персонаж становится самодостаточным.',
-                method: 'Компенсация'
+                seriesMethod: 'Модуляция, Замена формы предложения, Синтаксическое уподобление',
+                perceptionShift: 'В игре «are in alignment» → «встали как надо» (модуляция: формальное → разговорное), «is certain» → «будет за нами» (замена формы). В сериале «Yes, I\'m beautiful» → «Я прекрасна, согласна» (замена формы: маркер согласия смещён), «keep it in mind» → «не забывай» (модуляция: позитив → негатив), контрастная конструкция сохраняется уподоблением. Переход: от мистической уверенности к личной иронической силе.',
+                method: 'Замена формы предложения'
             },
             {
                 game: '"Thus, you pay."',
-                series: '"Yes, I\'m beautiful. But my arrows are even more precise — keep it in mind for the future."',
+                series: '"The Moon guides my arrow — and your shadow already belongs to it."',
                 gameContext: 'Краткий приговор — лаконичное завершение боя, констатация расплаты.',
-                seriesContext: 'Ироничная угроза с самоиронией — сила подчёркивается через неожиданный контраст с внешностью.',
+                seriesContext: 'Угрожающий образ с лунной символикой: стрела Принцессы направляется самой Луной, а тень врага уже принадлежит ей.',
                 gameTranslation: '«Горе побеждённым.»',
-                gameMethod: 'Целостное преобразование, Модуляция',
-                seriesTranslation: '«Я прекрасна, согласна. Но мои стрелы куда точнее — не забывай об этом.»',
-                seriesMethod: 'Модуляция, Замена типа предложения',
-                perceptionShift: 'Игровой лаконизм — приговор без лишних слов, эхо античной традиции. Сериал разворачивает ту же угрозу в ироничный монолог. Слом: от эпической краткости к современной самопрезентации.',
-                method: 'Целостное преобразование'
+                gameMethod: 'Антонимический перевод',
+                seriesTranslation: '«Луна — мой проводник в стрельбе, а твоя тень — уже её трофей.»',
+                seriesMethod: 'Модуляция, Замена формы предложения',
+                perceptionShift: 'В игре «Thus, you pay» → «Горе побеждённым» — антонимический перевод: личное обращение 2-го лица заменяется безличным крылатым выражением, сохраняя функцию приговора. В сериале «guides my arrow» → «мой проводник в стрельбе» (модуляция: действие → роль), «belongs to it» → «её трофей» (модуляция: принадлежность → завоевание), глагольные предикаты → именные (замена формы). Переход: от лаконичного приговора к образной угрозе.',
+                method: 'Антонимический перевод'
             }
         ]
     }
 };
+
+
 
 // Виртуальный персонаж "Все" — объединяет реплики всех персонажей
 function getAllLines() {
@@ -1819,591 +1884,343 @@ function getAllLines() {
 
 const GLOSSARY = [
     {
-        name: 'Модуляция (Смысловое развитие)',
-        desc: 'Замена единицы перевода, связанной с оригиналом причинно-следственными отношениями. Значение логически вытекает из источника, но переформулировано иначе.',
-        example: 'Пример: "He is dead" → "Он потерял жизнь" (следствие вместо факта).'
+        name: 'Модуляция',
+        desc: 'Замена единицы перевода, связанной с оригиналом причинно-следственными или логическими отношениями. Значение вытекает из источника, но переформулировано иначе.',
+        example: 'Пример из диплома: "stirs the blood" → "горячит кровь"; "Not even I can change that" → "Даже я бессилен".'
     },
     {
         name: 'Компенсация',
-        desc: 'Восполнение потери при переводе в одном месте за счёт введения эквивалентного элемента в другом.',
-        example: 'Пример: непереводимая игра слов в начале → иная игра слов в другом месте текста.'
+        desc: 'Восполнение потери смысла или стиля в одном месте за счёт введения эквивалентного элемента в другом.',
+        example: 'Пример из диплома: потеря метафоры "blazing out" компенсируется усилением «маяк мудрости»; "I wanted your blood" → "и твоей в том числе" компенсируется «во власти ярости».'
     },
     {
         name: 'Синтаксическое уподобление',
-        desc: 'Сохранение синтаксической структуры оригинала при переводе — порядка слов, членения на предложения.',
-        example: 'Пример: короткие рубленые фразы оригинала сохраняются в переводе без объединения.'
+        desc: 'Сохранение синтаксической структуры оригинала при переводе — порядок слов, членение на предложения, тип конструкций.',
+        example: 'Пример из диплома: "Stories are stories. Dead is dead." → "Сказки — это сказки. Мёртвый — мёртв." (рублёный ритм сохранён).'
     },
     {
         name: 'Транскрипция',
         desc: 'Передача звуковой формы иноязычного слова средствами переводящего языка.',
-        example: 'Пример: "Foulfell" → "Фоулфелл" (транскрипция собственного имени).'
+        example: 'Пример из диплома: "Foulfell" → "Фоулфелл".'
     },
     {
         name: 'Конкретизация',
         desc: 'Замена слова с широким значением словом с более узким, конкретным значением.',
-        example: 'Пример: "things" → "тайны" (уточнение абстрактного понятия).'
-    },
-    {
-        name: 'Опущение',
-        desc: 'Отказ от передачи в переводе семантически избыточных слов, значение которых восстанавливается из контекста.',
-        example: 'Пример: "already dim and damp" → "сырая" (опущение одного из синонимичных определений).'
+        example: 'Пример из диплома: "things" → "тайны"; "Creation" → "Сотворение мира".'
     },
     {
         name: 'Генерализация',
         desc: 'Замена единицы с узким предметно-логическим значением единицей с более широким значением.',
-        example: 'Пример: "blazing out" → без этого уточнения, общий образ маяка сохраняется.'
+        example: 'Пример из диплома: "steed" → "конь"; "mutt" (монгрель) → "щенок".'
     },
     {
         name: 'Калькирование',
         desc: 'Пословный перевод иноязычной единицы — каждый элемент оригинала передаётся соответствующим элементом языка перевода.',
-        example: 'Пример: "stirs the blood" → "горячит кровь" (дословная передача образа).'
+        example: 'Пример из диплома: "The dragon comes for war" → "Дракон идёт на войну"; "beacon of knowledge" → "маяк мудрости".'
     },
     {
-        name: 'Замена формы слова',
-        desc: 'Изменение морфологической формы слова при сохранении лексического значения — замена числа, падежа, степени прилагательного и т.д.',
-        example: 'Пример: "the darkest shadows" → "непроглядную тьму" (мн. число → ед. число, усиление через иной суффикс).'
+        name: 'Опущение',
+        desc: 'Отказ от передачи семантически избыточных элементов, значение которых восстанавливается из контекста.',
+        example: 'Пример из диплома: "already dim and damp" → "сырая" (опущение «dim»); "blazing out" опускается при переводе фразы с маяком.'
     },
     {
-        name: 'Целостное преобразование',
-        desc: 'Полная замена как формы, так и значения единицы перевода при сохранении общей прагматической функции высказывания.',
-        example: 'Пример: "Thus, you pay" → "Горе побеждённым" (смысл расплаты передаётся крылатым выражением).'
+        name: 'Перестановка',
+        desc: 'Изменение порядка следования языковых элементов при переводе: слов, словосочетаний, частей предложения.',
+        example: 'Пример из диплома: "Like a match…, your mind snuffs out" → "Твой ум гаснет, как сырая спичка" (сравнение перемещено в конец).'
     },
     {
-        name: 'Замена типа предложения',
-        desc: 'Преобразование синтаксического типа предложения: повествовательное → вопросительное, восклицательное → утвердительное и т.д.',
-        example: 'Пример: утвердительное "keep it in mind" → побудительное "не забывай об этом".'
+        name: 'Антонимический перевод',
+        desc: 'Замена утвердительной формы отрицательной или наоборот, либо замена понятия противоположным при сохранении общего смысла высказывания.',
+        example: 'Пример из диплома: "I\'ll luck upon you" → "Будь проклят" (нейтральное/позитивное → негативное); "Thus, you pay" → "Горе побеждённым".'
     },
     {
-        name: 'Добавление',
-        desc: 'Введение в перевод дополнительных лексических единиц, отсутствующих в оригинале, для передачи имплицитного смысла или компенсации культурных различий.',
-        example: 'Пример: добавление эмоционального акцента «вновь» для передачи идеи возвращения.'
+        name: 'Замена формы предложения',
+        desc: 'Преобразование синтаксического типа: активная конструкция → пассивная, личная → безличная, простое → сложное и т.д.',
+        example: 'Пример из диплома: "You know too many things" → "Слишком много тайн тебе открыто" (актив → пассив); "our victory is certain" → "победа будет за нами".'
+    },
+    {
+        name: 'Описательный перевод',
+        desc: 'Лексико-грамматическая трансформация: безэквивалентная единица раскрывается через развёрнутое словосочетание, поясняющее её смысл.',
+        example: 'Пример из диплома: эллиптичное "Never harm me?" → "Ты же обещал меня не трогать…" (имплицитный смысл обещания эксплицируется).'
+    },
+    {
+        name: 'Членение предложения',
+        desc: 'Синтаксическая трансформация: одно предложение оригинала делится на два и более при переводе.',
+        example: 'Пример из диплома: цепочка "You took them from me. You took everything from me!" сжимается в "Ты убил моих родителей. Отнял всё!" с опущением повторного подлежащего.'
     }
 ];
 
-const ALL_METHODS = GLOSSARY.map(g => g.name.split(' (')[0]);
 
-// ── СОСТОЯНИЕ ──
-let currentChar = 'all';
-let currentMode = 'study';
-let methodFilter = '';
+const ALL_METHODS = GLOSSARY.map(g => g.name);
+
+// ═══════════════════════════════════════════════════════════
+//  СОСТОЯНИЕ
+// ═══════════════════════════════════════════════════════════
+let currentChar   = 'all';
+let currentMode   = 'study';   // 'study' | 'practice'
+let methodFilter  = '';
 let currentLineIndex = 0;
-let practiceAnswered = false;
 let practiceScore = { correct: 0, total: 0 };
-let studyCardAnswered = { game: false, series: false };
-let studyCardSelected = { game: [], series: [] };
+let cardAnswered  = { game: false, series: false };
+let cardSelected  = { game: [], series: [] };
 let practiceLineOrder = [];
-let practiceOrderKey = '';
-let testFinished = false;
-let glossaryOpen = false;
+let practiceOrderKey  = '';
+let testFinished  = false;
+let glossaryOpen  = false;
 
+// ═══════════════════════════════════════════════════════════
+//  SVG-аватары (запасные, если картинки нет)
+// ═══════════════════════════════════════════════════════════
 function makeAvatar(charId, side) {
-    if (charId === 'all') {
-        const color = side === 'game' ? '%23154080' : '%23406015';
-        const textColor = side === 'game' ? '%23aaccff' : '%23ccff80';
-        const initials = side === 'game' ? 'ALL' : 'ALL';
-        return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='54'%3E%3Ccircle cx='27' cy='27' r='27' fill='${color}'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='${textColor}' font-size='18' font-family='Arial' font-weight='bold'%3E${initials}%3C/text%3E%3C/svg%3E`;
-    }
-    const char = CHARACTERS[charId];
-    const initials = side === 'game' ? char.gameInitials : char.seriesInitials;
-    const color = side === 'game' ? '%23801515' : '%23806010';
+    const color     = side === 'game' ? '%23801515' : '%23806010';
     const textColor = side === 'game' ? '%23ffaaaa' : '%23ffd070';
-    return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='54'%3E%3Ccircle cx='27' cy='27' r='27' fill='${color}'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='${textColor}' font-size='18' font-family='Arial' font-weight='bold'%3E${initials}%3C/text%3E%3C/svg%3E`;
+    let initials = '??';
+    if (charId !== 'all' && CHARACTERS[charId]) {
+        initials = side === 'game' ? CHARACTERS[charId].gameInitials : CHARACTERS[charId].seriesInitials;
+    } else {
+        initials = side === 'game' ? 'DK' : 'SER';
+    }
+    return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='54'%3E%3Ccircle cx='27' cy='27' r='27' fill='${color}'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='${textColor}' font-size='16' font-family='Arial' font-weight='bold'%3E${initials}%3C/text%3E%3C/svg%3E`;
 }
 
+// ═══════════════════════════════════════════════════════════
+//  ФИЛЬТРАЦИЯ И НАВИГАЦИЯ
+// ═══════════════════════════════════════════════════════════
 function getCharData(line) {
-    if (currentChar === 'all' && line._charId) {
-        return CHARACTERS[line._charId];
-    }
-    return CHARACTERS[currentChar];
+    const id = (currentChar === 'all' && line._charId) ? line._charId : currentChar;
+    return CHARACTERS[id] || CHARACTERS['davion'];
+}
+
+function splitMethods(str) {
+    return String(str || '').split(',').map(m => m.trim()).filter(Boolean);
 }
 
 function getBaseFilteredLines() {
-    let lines;
-    if (currentChar === 'all') {
-        lines = getAllLines();
-    } else {
-        lines = CHARACTERS[currentChar].lines;
-    }
+    let lines = currentChar === 'all' ? getAllLines() : CHARACTERS[currentChar].lines;
     if (!methodFilter) return lines;
     return lines.filter(l =>
-        l.gameMethod.includes(methodFilter) ||
-        l.seriesMethod.includes(methodFilter) ||
-        l.method.includes(methodFilter)
+        splitMethods(l.gameMethod).includes(methodFilter) ||
+        splitMethods(l.seriesMethod).includes(methodFilter)
     );
 }
 
-function shuffleLines(lines) {
-    const shuffled = [...lines];
-    for (let i = shuffled.length - 1; i > 0; i--) {
+function shuffleArray(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        [a[i], a[j]] = [a[j], a[i]];
     }
-    return shuffled;
-}
-
-function resetPracticeOrder() {
-    practiceLineOrder = [];
-    practiceOrderKey = '';
+    return a;
 }
 
 function getFilteredLines() {
     const lines = getBaseFilteredLines();
-
-    if (currentMode !== 'practice') {
-        return lines;
-    }
-
+    if (currentMode !== 'practice') return lines;
     const key = `${currentChar}|${methodFilter}|${lines.length}`;
     if (practiceOrderKey !== key || practiceLineOrder.length !== lines.length) {
-        practiceLineOrder = shuffleLines(lines);
-        practiceOrderKey = key;
+        practiceLineOrder = shuffleArray(lines);
+        practiceOrderKey  = key;
     }
-
     return practiceLineOrder;
 }
 
+function resetState() {
+    cardAnswered = { game: false, series: false };
+    cardSelected = { game: [], series: [] };
+}
+
 function navigate(dir) {
-    if (currentMode === 'practice') {
-        if (dir < 0) return;
-        if (dir > 0 && !(studyCardAnswered.game && studyCardAnswered.series)) return;
-    }
-
-    const filtered = getFilteredLines();
+    const lines = getFilteredLines();
     const newIdx = currentLineIndex + dir;
-    if (newIdx < 0 || newIdx >= filtered.length) return;
+    if (newIdx < 0 || newIdx >= lines.length) return;
     currentLineIndex = newIdx;
-    practiceAnswered = false;
-    resetCardQuizState();
+    resetState();
     render();
 }
 
-function changeCharacter(charId) {
-    testFinished = false;
-    restoreTrainerInterface();
-    currentChar = charId;
-    currentLineIndex = 0;
-    practiceAnswered = false;
-    resetCardQuizState();
-    resetPracticeOrder();
-    render();
-}
-
-function changeFilter(val) {
-    testFinished = false;
-    restoreTrainerInterface();
-    methodFilter = val;
-    currentLineIndex = 0;
-    practiceAnswered = false;
-    resetCardQuizState();
-    resetPracticeOrder();
-    render();
-}
-
+function changeCharacter(v) { testFinished=false; restoreUI(); currentChar=v; currentLineIndex=0; resetState(); practiceLineOrder=[]; practiceOrderKey=''; render(); }
+function changeFilter(v)    { testFinished=false; restoreUI(); methodFilter=v; currentLineIndex=0; resetState(); practiceLineOrder=[]; practiceOrderKey=''; render(); }
 function setMode(mode) {
-    testFinished = false;
-    restoreTrainerInterface();
-    currentMode = mode;
-    practiceAnswered = false;
-    resetCardQuizState();
-    currentLineIndex = 0;
-    if (mode === 'practice') {
-        practiceScore = { correct: 0, total: 0 };
-        resetPracticeOrder();
-    }
+    testFinished=false; restoreUI();
+    currentMode=mode;
+    currentLineIndex=0;
+    resetState();
+    if (mode==='practice') { practiceScore={correct:0,total:0}; practiceLineOrder=[]; practiceOrderKey=''; }
     render();
 }
 
+// ═══════════════════════════════════════════════════════════
+//  РЕНДЕР МЕТОК ТРАНСФОРМАЦИЙ
+// ═══════════════════════════════════════════════════════════
 function renderMethodTags(containerId, methodStr) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = '';
-    methodStr.split(',').map(m => m.trim()).filter(Boolean).forEach(m => {
-        const tag = document.createElement('span');
-        tag.className = 'method-tag';
-        tag.textContent = m;
-        tag.title = getMethodDesc(m);
-        container.appendChild(tag);
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    el.innerHTML = '';
+    splitMethods(methodStr).forEach(m => {
+        const span = document.createElement('span');
+        span.className = 'method-tag';
+        span.textContent = m;
+        const g = GLOSSARY.find(x => x.name === m);
+        if (g) span.title = g.desc;
+        el.appendChild(span);
     });
 }
 
-function render() {
-    if (testFinished) {
-        showTestResultScreen();
-        return;
-    }
-    restoreTrainerInterface();
-    const filtered = getFilteredLines();
-    const hasLines = filtered.length > 0;
-    const line = hasLines ? filtered[currentLineIndex] : null;
-    const charData = line ? getCharData(line) : (currentChar !== 'all' ? CHARACTERS[currentChar] : CHARACTERS['davion']);
-
-    document.getElementById('studyModeBtn').classList.toggle('active', currentMode === 'study');
-    document.getElementById('practiceModeBtn').classList.toggle('active', currentMode === 'practice');
-
-    const badge = document.getElementById('scoreBadge');
-    badge.classList.toggle('visible', currentMode === 'practice');
-    document.getElementById('scoreDisplay').textContent = `${practiceScore.correct} / ${practiceScore.total}`;
-
-    document.getElementById('emptyState').style.display = hasLines ? 'none' : 'block';
-    document.getElementById('gameCard').style.display = hasLines ? 'block' : 'none';
-    document.getElementById('seriesCard').style.display = hasLines ? 'block' : 'none';
-    document.querySelector('.workspace-arrow').style.display = hasLines ? 'flex' : 'none';
-    document.getElementById('analysisWrap').style.display = hasLines ? 'block' : 'none';
-
-    if (!hasLines) { renderNav(filtered); return; }
-
-    document.getElementById('gameCharName').textContent = charData.gameName;
-    document.getElementById('seriesCharName').textContent = charData.seriesName;
-
-    const effectiveCharId = (currentChar === 'all' && line._charId) ? line._charId : currentChar;
-
-    const gameImg = document.getElementById('gameImg');
-    gameImg.src = charData.gameImage;
-    gameImg.onerror = () => { gameImg.src = makeAvatar(effectiveCharId, 'game'); };
-
-    const seriesImg = document.getElementById('seriesImg');
-    seriesImg.src = charData.seriesImage;
-    seriesImg.onerror = () => { seriesImg.src = makeAvatar(effectiveCharId, 'series'); };
-
-    document.getElementById('gameQuote').textContent = line.game;
-    document.getElementById('seriesQuote').textContent = line.series;
-    document.getElementById('gameContext').textContent = line.gameContext;
-    document.getElementById('seriesContext').textContent = line.seriesContext;
-
-    document.getElementById('gameTranslationText').textContent = line.gameTranslation;
-    renderMethodTags('gameMethodTag', line.gameMethod);
-    document.getElementById('seriesTranslationText').textContent = line.seriesTranslation;
-    renderMethodTags('seriesMethodTag', line.seriesMethod);
-
-    const isPractice = currentMode === 'practice';
-
-    document.getElementById('gameMethodTag').style.display = isPractice ? 'none' : '';
-    document.getElementById('seriesMethodTag').style.display = isPractice ? 'none' : '';
-
-    const studyPanel = document.getElementById('resultPanel');
-    const practicePanel = document.getElementById('practicePanel');
-    const gameQuiz = document.getElementById('gameCardQuiz');
-    const seriesQuiz = document.getElementById('seriesCardQuiz');
-
-    if (currentMode === 'study') {
-        studyPanel.style.display = 'block';
-        practicePanel.classList.remove('visible');
-        gameQuiz.classList.remove('visible');
-        seriesQuiz.classList.remove('visible');
-        document.getElementById('practiceNextWrap').style.display = 'none';
-        document.getElementById('resultTranslation').textContent = '';
-        document.getElementById('resultRationale').textContent = line.perceptionShift;
-    } else {
-        studyPanel.style.display = 'none';
-        practicePanel.classList.remove('visible');
-        gameQuiz.classList.add('visible');
-        seriesQuiz.classList.add('visible');
-        document.getElementById('practiceNextWrap').style.display = 'flex';
-        renderCardQuiz('game', line);
-        renderCardQuiz('series', line);
-        updatePracticeNextButton();
-    }
-
-    renderNav(filtered);
+function toggleMethodReveal(side) {
+    const tagEl = document.getElementById(side==='game' ? 'gameMethodTag'    : 'seriesMethodTag');
+    const btnEl = document.getElementById(side==='game' ? 'gameMethodRevealBtn' : 'seriesMethodRevealBtn');
+    if (!tagEl || !btnEl) return;
+    const show = tagEl.style.display === 'none' || tagEl.style.display === '';
+    tagEl.style.display  = show ? 'flex' : 'none';
+    btnEl.textContent    = show ? 'Скрыть трансформацию' : 'Показать трансформацию';
+    btnEl.classList.toggle('revealed', show);
 }
 
-function renderNav(filtered) {
-    const total = filtered.length;
-    const idx = currentLineIndex;
-    const isPractice = currentMode === 'practice';
-    const readyForNext = studyCardAnswered.game && studyCardAnswered.series;
-    const isLast = idx >= total - 1;
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+// ═══════════════════════════════════════════════════════════
+//  ТЕСТОВЫЙ РЕЖИМ: выбор и проверка
+// ═══════════════════════════════════════════════════════════
+function toggleCardSelection(side, method) {
+    if (cardAnswered[side]) return;
+    const sel = cardSelected[side];
+    const idx = sel.indexOf(method);
+    if (idx >= 0) sel.splice(idx, 1); else sel.push(method);
 
-    document.getElementById('lineCounter').textContent = total > 0 ? `${idx + 1} / ${total}` : '0 / 0';
-
-    // В тесте назад возвращаться нельзя, но стрелка вперёд работает после ответа.
-    prevBtn.disabled = isPractice ? true : (idx === 0 || total === 0);
-    nextBtn.disabled = isPractice
-        ? (!readyForNext || isLast || total === 0)
-        : (isLast || total === 0);
-
-    prevBtn.title = isPractice ? 'В тесте нельзя возвращаться к предыдущим вопросам' : 'Назад (←)';
-    nextBtn.title = isPractice
-        ? (readyForNext ? 'Перейти к следующей карточке' : 'Сначала ответьте на обе трансформации')
-        : 'Вперёд (→)';
-
-    const dotsEl = document.getElementById('lineDots');
-    dotsEl.innerHTML = '';
-    for (let i = 0; i < total; i++) {
-        const d = document.createElement('span');
-        d.className = 'dot' + (i === idx ? ' active' : '');
-        if (isPractice) {
-            d.style.pointerEvents = 'none';
-            d.style.opacity = i === idx ? '1' : '0.35';
-            d.title = 'В тесте нельзя возвращаться к предыдущим вопросам';
-        } else {
-            d.onclick = () => { currentLineIndex = i; practiceAnswered = false; resetCardQuizState(); render(); };
-        }
-        dotsEl.appendChild(d);
-    }
-}
-
-
-
-function splitMethods(methodStr) {
-    return String(methodStr || '')
-        .split(',')
-        .map(m => m.trim())
-        .filter(Boolean);
-}
-
-function hasMultipleMethods(methodStr) {
-    return splitMethods(methodStr).length > 1;
-}
-
-function normalizeMethods(methods) {
-    return methods.map(m => String(m || '').trim()).filter(Boolean).sort();
-}
-
-function isExactMethodSet(selected, correct) {
-    const selectedMethods = normalizeMethods(selected);
-    const correctMethods = normalizeMethods(splitMethods(correct));
-    if (selectedMethods.length !== correctMethods.length) return false;
-    return selectedMethods.every((method, index) => method === correctMethods[index]);
-}
-
-function formatMethodList(methodStr) {
-    return splitMethods(methodStr).map(m => `«${m}»`).join(', ');
-}
-
-function resetCardQuizState() {
-    studyCardAnswered = { game: false, series: false };
-    studyCardSelected = { game: [], series: [] };
-}
-
-function getSideElementIds(side) {
-    return {
-        optionsId: side === 'game' ? 'gameCardOptions' : 'seriesCardOptions',
-        feedbackId: side === 'game' ? 'gameCardFeedback' : 'seriesCardFeedback',
-        revealId: side === 'game' ? 'gameCardRevealBtn' : 'seriesCardRevealBtn',
-        submitId: side === 'game' ? 'gameCardSubmitBtn' : 'seriesCardSubmitBtn',
-        noteId: side === 'game' ? 'gameMultiAnswerNote' : 'seriesMultiAnswerNote'
-    };
-}
-
-function renderCardQuiz(side, line) {
-    const ids = getSideElementIds(side);
-    const optionsEl = document.getElementById(ids.optionsId);
-    const feedbackEl = document.getElementById(ids.feedbackId);
-    const revealBtn = document.getElementById(ids.revealId);
-    const noteEl = document.getElementById(ids.noteId);
-    const correctMethod = side === 'game' ? line.gameMethod : line.seriesMethod;
-    const answered = studyCardAnswered[side];
-    const methods = splitMethods(correctMethod);
-
-    feedbackEl.className = 'card-quiz-feedback';
-    feedbackEl.textContent = '';
-    optionsEl.innerHTML = '';
-    revealBtn.style.display = answered ? 'none' : 'inline-block';
-
-    if (methods.length > 1) {
-        noteEl.textContent = `В этом вопросе ${methods.length} правильных ответа. Выберите все подходящие варианты.`;
-        noteEl.classList.add('visible');
-    } else {
-        noteEl.textContent = '';
-        noteEl.classList.remove('visible');
-    }
-
-    ALL_METHODS.forEach(m => {
-        const btn = document.createElement('button');
-        btn.className = 'card-method-btn';
-        btn.textContent = m;
-        btn.disabled = answered;
-        if (studyCardSelected[side].includes(m)) btn.classList.add('selected');
-        btn.onclick = () => toggleCardSelection(side, m, correctMethod);
-        optionsEl.appendChild(btn);
+    // Обновить визуальный вид кнопок вариантов
+    const optId = side==='game' ? 'gameCardOptions' : 'seriesCardOptions';
+    document.querySelectorAll(`#${optId} .card-method-btn`).forEach(btn => {
+        btn.classList.toggle('selected', sel.includes(btn.textContent));
     });
 
-    if (answered) {
-        highlightCardAnswer(side, correctMethod, null);
-    }
+    // Активировать кнопку «Проверить» на карточке
+    const submitId = side==='game' ? 'gameCardSubmitBtn' : 'seriesCardSubmitBtn';
+    const submitBtn = document.getElementById(submitId);
+    if (submitBtn) submitBtn.disabled = sel.length === 0;
+
+    // Активировать общую кнопку «Ответить» внизу
+    refreshBottomSubmitBtn();
 }
 
-function toggleCardSelection(side, chosen, correct) {
-    if (studyCardAnswered[side]) return;
+function checkCardAnswer(side) {
+    if (cardAnswered[side]) return;
+    if (cardSelected[side].length === 0) return;
 
-    const selected = studyCardSelected[side];
-    const existingIndex = selected.indexOf(chosen);
-    const correctCount = splitMethods(correct).length;
+    const lines   = getFilteredLines();
+    const line    = lines[currentLineIndex];
+    if (!line) return;
 
-    if (existingIndex >= 0) {
-        selected.splice(existingIndex, 1);
-    } else {
-        if (correctCount === 1) {
-            studyCardSelected[side] = [chosen];
-        } else {
-            selected.push(chosen);
-        }
-    }
+    const correct = side==='game' ? line.gameMethod : line.seriesMethod;
+    cardAnswered[side] = true;
 
-    const ids = getSideElementIds(side);
-    const optionsEl = document.getElementById(ids.optionsId);
-    optionsEl.querySelectorAll('.card-method-btn').forEach(btn => {
-        btn.classList.toggle('selected', studyCardSelected[side].includes(btn.textContent));
-    });
-
-    updatePracticeNextButton();
-}
-
-function evaluateCardAnswer(side) {
-    const filtered = getFilteredLines();
-    const line = filtered[currentLineIndex];
-    if (!line || studyCardAnswered[side]) return false;
-
-    const correct = side === 'game' ? line.gameMethod : line.seriesMethod;
-    const selected = studyCardSelected[side];
-    if (!selected.length) return false;
-
-    studyCardAnswered[side] = true;
-
-    const isCorrect = isExactMethodSet(selected, correct);
+    // Подсчёт очков
+    const normSel     = [...cardSelected[side]].sort();
+    const normCorrect = splitMethods(correct).sort();
+    const isOk = normSel.length === normCorrect.length && normSel.every((m,i) => m === normCorrect[i]);
     practiceScore.total++;
-    if (isCorrect) practiceScore.correct++;
+    if (isOk) practiceScore.correct++;
     document.getElementById('scoreDisplay').textContent = `${practiceScore.correct} / ${practiceScore.total}`;
 
-    highlightCardAnswer(side, correct, selected);
-
-    const ids = getSideElementIds(side);
-    const feedbackEl = document.getElementById(ids.feedbackId);
-    feedbackEl.classList.add('visible');
-    if (isCorrect) {
-        feedbackEl.classList.add('ok');
-        feedbackEl.innerHTML = `<strong>Верно!</strong> Правильный ответ: ${formatMethodList(correct)}.`;
-    } else {
-        feedbackEl.classList.add('fail');
-        feedbackEl.innerHTML = `<strong>Не совсем.</strong> Вы выбрали: ${selected.map(m => `«${m}»`).join(', ')}.<br>Правильный ответ: ${formatMethodList(correct)}.`;
-    }
-
-    const revealBtn = document.getElementById(ids.revealId);
-    if (revealBtn) revealBtn.style.display = 'none';
-    document.querySelectorAll(`#${ids.optionsId} .card-method-btn`).forEach(b => b.disabled = true);
-    return true;
-}
-
-function canSubmitBothAnswers() {
-    if (studyCardAnswered.game && studyCardAnswered.series) return false;
-    const gameReady = studyCardAnswered.game || studyCardSelected.game.length > 0;
-    const seriesReady = studyCardAnswered.series || studyCardSelected.series.length > 0;
-    return gameReady && seriesReady;
-}
-
-function submitBothAnswers() {
-    if (!canSubmitBothAnswers()) return;
-    evaluateCardAnswer('game');
-    evaluateCardAnswer('series');
-    updatePracticeNextButton();
-}
-
-function submitCardAnswer(side) {
-    evaluateCardAnswer(side);
-    updatePracticeNextButton();
-}
-
-function highlightCardAnswer(side, correct, chosen) {
-    const ids = getSideElementIds(side);
-    const optionsEl = document.getElementById(ids.optionsId);
-    const correctMethods = splitMethods(correct);
-    const chosenMethods = Array.isArray(chosen) ? chosen : (chosen ? [chosen] : []);
-
-    optionsEl.querySelectorAll('.card-method-btn').forEach(btn => {
-        const isCorrectBtn = correctMethods.some(method => method === btn.textContent || method.startsWith(btn.textContent));
-        const isChosenBtn = chosenMethods.includes(btn.textContent);
+    // Подсветка вариантов
+    const optId = side==='game' ? 'gameCardOptions' : 'seriesCardOptions';
+    document.querySelectorAll(`#${optId} .card-method-btn`).forEach(btn => {
+        const isCorr = splitMethods(correct).includes(btn.textContent);
+        const isSel  = cardSelected[side].includes(btn.textContent);
         btn.classList.remove('selected');
-        if (chosen === null) {
-            if (isCorrectBtn) btn.classList.add('reveal-correct');
-        } else {
-            if (isCorrectBtn) btn.classList.add('correct');
-            if (isChosenBtn && !isCorrectBtn) btn.classList.add('wrong');
-        }
+        btn.disabled = true;
+        if (isCorr) btn.classList.add('correct');
+        if (isSel && !isCorr) btn.classList.add('wrong');
     });
+
+    // Фидбек
+    const fbId = side==='game' ? 'gameCardFeedback' : 'seriesCardFeedback';
+    const fb   = document.getElementById(fbId);
+    fb.className = 'card-quiz-feedback visible ' + (isOk ? 'ok' : 'fail');
+    fb.innerHTML = isOk
+        ? `<strong>Верно!</strong> Ответ: ${splitMethods(correct).map(m=>`«${m}»`).join(', ')}.`
+        : `<strong>Не совсем.</strong> Вы выбрали: ${cardSelected[side].map(m=>`«${m}»`).join(', ')}.<br>Правильный ответ: ${splitMethods(correct).map(m=>`«${m}»`).join(', ')}.`;
+
+    // Скрыть кнопки «Проверить» и «Показать ответ»
+    const submitId = side==='game' ? 'gameCardSubmitBtn' : 'seriesCardSubmitBtn';
+    const revealId = side==='game' ? 'gameCardRevealBtn' : 'seriesCardRevealBtn';
+    const s = document.getElementById(submitId); if (s) s.style.display='none';
+    const r = document.getElementById(revealId); if (r) r.style.display='none';
+
+    refreshBottomSubmitBtn();
+    refreshNextBtn();
 }
 
 function revealCardAnswer(side) {
-    const filtered = getFilteredLines();
-    const line = filtered[currentLineIndex];
-    if (!line || studyCardAnswered[side]) return;
+    if (cardAnswered[side]) return;
+    const lines = getFilteredLines();
+    const line  = lines[currentLineIndex];
+    if (!line) return;
 
-    studyCardAnswered[side] = true;
-    const correct = side === 'game' ? line.gameMethod : line.seriesMethod;
+    const correct = side==='game' ? line.gameMethod : line.seriesMethod;
+    cardAnswered[side] = true;
 
-    highlightCardAnswer(side, correct, null);
-    const ids = getSideElementIds(side);
-    const revealBtn = document.getElementById(ids.revealId);
-    if (revealBtn) revealBtn.style.display = 'none';
-    document.querySelectorAll(`#${ids.optionsId} .card-method-btn`).forEach(b => b.disabled = true);
+    // Подсветка правильных (пунктир — «показали»)
+    const optId = side==='game' ? 'gameCardOptions' : 'seriesCardOptions';
+    document.querySelectorAll(`#${optId} .card-method-btn`).forEach(btn => {
+        btn.disabled = true;
+        btn.classList.remove('selected');
+        if (splitMethods(correct).includes(btn.textContent)) btn.classList.add('reveal-correct');
+    });
 
-    const feedbackEl = document.getElementById(ids.feedbackId);
-    feedbackEl.classList.add('visible');
-    feedbackEl.innerHTML = `Тип трансформации: ${formatMethodList(correct)}.`;
+    // Фидбек
+    const fbId = side==='game' ? 'gameCardFeedback' : 'seriesCardFeedback';
+    const fb   = document.getElementById(fbId);
+    fb.className = 'card-quiz-feedback visible';
+    fb.innerHTML = `Правильный ответ: ${splitMethods(correct).map(m=>`«${m}»`).join(', ')}.`;
 
-    updatePracticeNextButton();
+    // Скрыть кнопки
+    const submitId = side==='game' ? 'gameCardSubmitBtn' : 'seriesCardSubmitBtn';
+    const revealId = side==='game' ? 'gameCardRevealBtn' : 'seriesCardRevealBtn';
+    const s = document.getElementById(submitId); if (s) s.style.display='none';
+    const r = document.getElementById(revealId); if (r) r.style.display='none';
+
+    refreshBottomSubmitBtn();
+    refreshNextBtn();
 }
 
-function isLastPracticeCard() {
-    const filtered = getFilteredLines();
-    return currentMode === 'practice' && filtered.length > 0 && currentLineIndex >= filtered.length - 1;
+// «Ответить» внизу — проверяет обе карточки сразу
+function submitBothAnswers() {
+    if (!cardAnswered.game   && cardSelected.game.length > 0)   checkCardAnswer('game');
+    if (!cardAnswered.series && cardSelected.series.length > 0) checkCardAnswer('series');
+    refreshBottomSubmitBtn();
+    refreshNextBtn();
 }
 
-function updatePracticeNextButton() {
-    const btn = document.getElementById('practiceNextBtn');
-    const answerBtn = document.getElementById('practiceSubmitBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const prevBtn = document.getElementById('prevBtn');
-    const filtered = getFilteredLines();
-    const last = isLastPracticeCard();
-    const ready = studyCardAnswered.game && studyCardAnswered.series;
-    const canAnswer = canSubmitBothAnswers();
+function refreshBottomSubmitBtn() {
+    const btn = document.getElementById('practiceSubmitBtn');
+    if (!btn) return;
+    const canGame   = !cardAnswered.game   && cardSelected.game.length > 0;
+    const canSeries = !cardAnswered.series && cardSelected.series.length > 0;
+    const ready     = cardAnswered.game && cardAnswered.series;
+    btn.style.display = ready ? 'none' : 'inline-flex';
+    btn.disabled = !(canGame || canSeries);
+}
 
-    if (answerBtn) {
-        answerBtn.style.display = ready ? 'none' : 'inline-flex';
-        answerBtn.disabled = !canAnswer;
-        answerBtn.title = canAnswer
-            ? 'Проверить ответы для Dota 2 и Dragon Blood'
-            : 'Выберите вариант ответа в обеих карточках';
-    }
+function refreshNextBtn() {
+    const btn  = document.getElementById('practiceNextBtn');
+    const next = document.getElementById('nextBtn');
+    const prev = document.getElementById('prevBtn');
+    const lines = getFilteredLines();
+    const ready = cardAnswered.game && cardAnswered.series;
+    const last  = currentLineIndex >= lines.length - 1;
 
     if (btn) {
+        btn.disabled = !ready;
         btn.textContent = last ? 'Завершить тест' : 'Следующая карточка →';
         btn.classList.toggle('finish', last);
-        btn.disabled = !ready;
-        btn.title = ready
-            ? (last ? 'Завершить тест' : 'Перейти к следующей карточке')
-            : 'Сначала нажмите «Ответить»';
     }
-
-    // В режиме теста верхняя стрелка «назад» всегда заблокирована.
-    // Стрелка «вперёд» работает только после общей проверки ответа.
-    if (currentMode === 'practice') {
-        if (prevBtn) {
-            prevBtn.disabled = true;
-            prevBtn.title = 'В тесте нельзя возвращаться к предыдущим вопросам';
-        }
-        if (nextBtn) {
-            nextBtn.disabled = !ready || last || filtered.length === 0;
-            nextBtn.title = ready
-                ? (last ? 'На последней карточке нажмите «Завершить тест»' : 'Перейти к следующей карточке')
-                : 'Сначала нажмите «Ответить»';
-        }
-    }
+    if (next && currentMode==='practice') next.disabled = !ready || last;
+    if (prev && currentMode==='practice') prev.disabled = true;
 }
 
 function handlePracticeNext() {
-    if (!(studyCardAnswered.game && studyCardAnswered.series)) return;
-    if (isLastPracticeCard()) {
-        finishTest();
-    } else {
-        navigate(1);
-    }
-}
-
-function getMaxPracticeScore() {
-    return getFilteredLines().length * 2;
+    if (!(cardAnswered.game && cardAnswered.series)) return;
+    const lines = getFilteredLines();
+    if (currentLineIndex >= lines.length - 1) { finishTest(); return; }
+    navigate(1);
 }
 
 function finishTest() {
@@ -2411,75 +2228,257 @@ function finishTest() {
     showTestResultScreen();
 }
 
-function restoreTrainerInterface() {
-    const trainerPage = document.getElementById('trainerPage');
-    if (!trainerPage) return;
-    const header = trainerPage.querySelector('.app-header');
-    const controls = trainerPage.querySelector('.controls-bar');
-    const workspace = document.getElementById('workspace');
-    const glossary = trainerPage.querySelector('.glossary-wrap');
-    const footer = trainerPage.querySelector('.app-footer');
-    const resultScreen = document.getElementById('testResultScreen');
+// ═══════════════════════════════════════════════════════════
+//  РЕНДЕР КАРТОЧКИ ТЕСТА
+// ═══════════════════════════════════════════════════════════
+function renderCardQuiz(side, line) {
+    const optId   = side==='game' ? 'gameCardOptions'    : 'seriesCardOptions';
+    const fbId    = side==='game' ? 'gameCardFeedback'   : 'seriesCardFeedback';
+    const noteId  = side==='game' ? 'gameMultiAnswerNote': 'seriesMultiAnswerNote';
+    const submitId= side==='game' ? 'gameCardSubmitBtn'  : 'seriesCardSubmitBtn';
+    const revealId= side==='game' ? 'gameCardRevealBtn'  : 'seriesCardRevealBtn';
+    const correct = side==='game' ? line.gameMethod      : line.seriesMethod;
+    const methods = splitMethods(correct);
+    const answered= cardAnswered[side];
 
-    if (header) header.style.display = 'flex';
-    if (controls) controls.style.display = 'flex';
-    if (workspace) workspace.style.display = 'grid';
-    if (glossary) glossary.style.display = 'block';
-    if (footer) footer.style.display = 'block';
-    if (resultScreen) resultScreen.style.display = 'none';
+    const optEl   = document.getElementById(optId);
+    const fbEl    = document.getElementById(fbId);
+    const noteEl  = document.getElementById(noteId);
+    const submitEl= document.getElementById(submitId);
+    const revealEl= document.getElementById(revealId);
+
+    // Очистить
+    optEl.innerHTML  = '';
+    fbEl.className   = 'card-quiz-feedback';
+    fbEl.textContent = '';
+
+    // Подсказка о количестве ответов
+    noteEl.innerHTML = methods.length > 1
+        ? `⚠️ <strong>${methods.length} правильных ответа</strong> — выберите все, затем нажмите «Проверить».`
+        : `Выберите один правильный вариант и нажмите «Проверить».`;
+    noteEl.classList.add('visible');
+
+    // Кнопки вариантов
+    ALL_METHODS.forEach(m => {
+        const btn = document.createElement('button');
+        btn.className = 'card-method-btn';
+        btn.textContent = m;
+        btn.disabled = answered;
+        if (cardSelected[side].includes(m)) btn.classList.add('selected');
+        btn.addEventListener('click', () => toggleCardSelection(side, m));
+        optEl.appendChild(btn);
+    });
+
+    // Если уже отвечено — подсветить
+    if (answered) {
+        optEl.querySelectorAll('.card-method-btn').forEach(btn => {
+            const isCorr = methods.includes(btn.textContent);
+            const isSel  = cardSelected[side].includes(btn.textContent);
+            if (isCorr) btn.classList.add(cardSelected[side].length > 0 ? 'correct' : 'reveal-correct');
+            if (isSel && !isCorr) btn.classList.add('wrong');
+        });
+        const correct_str = splitMethods(correct).map(m=>`«${m}»`).join(', ');
+        const normSel = [...cardSelected[side]].sort();
+        const normCorr = methods.slice().sort();
+        const isOk = normSel.length===normCorr.length && normSel.every((m,i)=>m===normCorr[i]);
+        fbEl.className = 'card-quiz-feedback visible ' + (cardSelected[side].length===0 ? '' : isOk ? 'ok' : 'fail');
+        fbEl.innerHTML = cardSelected[side].length===0
+            ? `Правильный ответ: ${correct_str}.`
+            : (isOk
+                ? `<strong>Верно!</strong> Ответ: ${correct_str}.`
+                : `<strong>Не совсем.</strong> Вы: ${cardSelected[side].map(m=>`«${m}»`).join(', ')}.<br>Правильный: ${correct_str}.`);
+    }
+
+    // Кнопки «Проверить» и «Показать ответ»
+    if (submitEl) {
+        submitEl.style.display = answered ? 'none' : 'inline-flex';
+        submitEl.disabled = cardSelected[side].length === 0;
+    }
+    if (revealEl) {
+        revealEl.style.display = answered ? 'none' : 'inline-block';
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+//  ОСНОВНОЙ РЕНДЕР
+// ═══════════════════════════════════════════════════════════
+function render() {
+    if (testFinished) { showTestResultScreen(); return; }
+    restoreUI();
+
+    const lines   = getFilteredLines();
+    const hasLines= lines.length > 0;
+    const line    = hasLines ? lines[currentLineIndex] : null;
+    const charData= line ? getCharData(line) : CHARACTERS['davion'];
+
+    // Режим-кнопки
+    document.getElementById('studyModeBtn').classList.toggle('active', currentMode==='study');
+    document.getElementById('practiceModeBtn').classList.toggle('active', currentMode==='practice');
+
+    // Счёт
+    const badge = document.getElementById('scoreBadge');
+    badge.classList.toggle('visible', currentMode==='practice');
+    document.getElementById('scoreDisplay').textContent = `${practiceScore.correct} / ${practiceScore.total}`;
+
+    // Показать/скрыть карточки
+    ['gameCard','seriesCard'].forEach(id => { document.getElementById(id).style.display = hasLines ? 'block' : 'none'; });
+    document.querySelector('.workspace-arrow').style.display = hasLines ? 'flex' : 'none';
+    document.getElementById('analysisWrap').style.display   = hasLines ? 'block' : 'none';
+    document.getElementById('emptyState').style.display     = hasLines ? 'none'  : 'block';
+
+    if (!hasLines) { renderNav(lines); return; }
+
+    // Заголовки карточек
+    document.getElementById('gameCharName').textContent   = charData.gameName;
+    document.getElementById('seriesCharName').textContent = charData.seriesName;
+
+    const effChar = (currentChar==='all' && line._charId) ? line._charId : currentChar;
+    const gi = document.getElementById('gameImg');
+    gi.src = charData.gameImage; gi.onerror = ()=>{ gi.src=makeAvatar(effChar,'game'); };
+    const si = document.getElementById('seriesImg');
+    si.src = charData.seriesImage; si.onerror = ()=>{ si.src=makeAvatar(effChar,'series'); };
+
+    // Цитаты и контекст
+    document.getElementById('gameQuote').textContent   = line.game;
+    document.getElementById('seriesQuote').textContent = line.series;
+    document.getElementById('gameContext').textContent   = line.gameContext;
+    document.getElementById('seriesContext').textContent = line.seriesContext;
+
+    // Переводы
+    document.getElementById('gameTranslationText').textContent   = line.gameTranslation;
+    document.getElementById('seriesTranslationText').textContent = line.seriesTranslation;
+    renderMethodTags('gameMethodTag',   line.gameMethod);
+    renderMethodTags('seriesMethodTag', line.seriesMethod);
+
+    const studyPanel  = document.getElementById('resultPanel');
+    const gameQuiz    = document.getElementById('gameCardQuiz');
+    const seriesQuiz  = document.getElementById('seriesCardQuiz');
+    const nextWrap    = document.getElementById('practiceNextWrap');
+    const hintBar     = document.getElementById('practiceHintBar');
+    const gRow        = document.getElementById('gameMethodRevealRow');
+    const sRow        = document.getElementById('seriesMethodRevealRow');
+    const gTag        = document.getElementById('gameMethodTag');
+    const sTag        = document.getElementById('seriesMethodTag');
+    const gRevBtn     = document.getElementById('gameMethodRevealBtn');
+    const sRevBtn     = document.getElementById('seriesMethodRevealBtn');
+
+    if (currentMode === 'study') {
+        // ── РЕЖИМ ОБУЧЕНИЯ ──────────────────────────────
+        studyPanel.style.display = 'block';
+        if (gameQuiz)  gameQuiz.classList.remove('visible');
+        if (seriesQuiz) seriesQuiz.classList.remove('visible');
+        if (nextWrap)  nextWrap.style.display = 'none';
+        if (hintBar)   hintBar.classList.remove('visible');
+        // Скрыть теги, показать кнопку «Показать трансформацию»
+        if (gTag) { gTag.style.display='none'; }
+        if (sTag) { sTag.style.display='none'; }
+        if (gRow) gRow.style.display = 'block';
+        if (sRow) sRow.style.display = 'block';
+        if (gRevBtn) { gRevBtn.textContent='Показать трансформацию'; gRevBtn.classList.remove('revealed'); }
+        if (sRevBtn) { sRevBtn.textContent='Показать трансформацию'; sRevBtn.classList.remove('revealed'); }
+        // Комментарий
+        document.getElementById('resultTranslation').textContent = '';
+        document.getElementById('resultRationale').textContent   = line.perceptionShift;
+        const rl = document.getElementById('resultLabel');
+        if (rl) rl.textContent = 'Кроссмедийный сдвиг восприятия';
+    } else {
+        // ── РЕЖИМ ТЕСТА ─────────────────────────────────
+        studyPanel.style.display = 'none';
+        if (gameQuiz)  gameQuiz.classList.add('visible');
+        if (seriesQuiz) seriesQuiz.classList.add('visible');
+        if (nextWrap)  nextWrap.style.display = 'flex';
+        if (hintBar)   hintBar.classList.add('visible');
+        // Скрыть теги и кнопку reveal
+        if (gTag) gTag.style.display = 'none';
+        if (sTag) sTag.style.display = 'none';
+        if (gRow) gRow.style.display = 'none';
+        if (sRow) sRow.style.display = 'none';
+        // Отрисовать квиз
+        renderCardQuiz('game',   line);
+        renderCardQuiz('series', line);
+        refreshBottomSubmitBtn();
+        refreshNextBtn();
+    }
+
+    renderNav(lines);
+}
+
+// ═══════════════════════════════════════════════════════════
+//  НАВИГАЦИЯ
+// ═══════════════════════════════════════════════════════════
+function renderNav(lines) {
+    const total    = lines.length;
+    const idx      = currentLineIndex;
+    const isPrac   = currentMode === 'practice';
+    const ready    = cardAnswered.game && cardAnswered.series;
+    const isLast   = idx >= total - 1;
+
+    document.getElementById('lineCounter').textContent = total > 0 ? `${idx+1} / ${total}` : '0 / 0';
+
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    prevBtn.disabled = isPrac ? true : (idx===0 || total===0);
+    nextBtn.disabled = isPrac ? (!ready || isLast || total===0) : (isLast || total===0);
+
+    const dots = document.getElementById('lineDots');
+    dots.innerHTML = '';
+    for (let i = 0; i < total; i++) {
+        const d = document.createElement('span');
+        d.className = 'dot' + (i===idx ? ' active' : '');
+        if (isPrac) { d.style.pointerEvents='none'; d.style.opacity = i===idx?'1':'0.35'; }
+        else        { d.onclick = ()=>{ currentLineIndex=i; resetState(); render(); }; }
+        dots.appendChild(d);
+    }
+}
+
+// ═══════════════════════════════════════════════════════════
+//  РЕЗУЛЬТАТ ТЕСТА
+// ═══════════════════════════════════════════════════════════
+function restoreUI() {
+    const tp = document.getElementById('trainerPage');
+    if (!tp) return;
+    const elems = [tp.querySelector('.app-header'), tp.querySelector('.controls-bar'),
+                   document.getElementById('workspace'), tp.querySelector('.glossary-wrap'),
+                   tp.querySelector('.app-footer')];
+    elems.forEach(e => { if (e) e.style.display = ''; });
+    const rs = document.getElementById('testResultScreen');
+    if (rs) rs.style.display = 'none';
 }
 
 function showTestResultScreen() {
-    const trainerPage = document.getElementById('trainerPage');
-    if (!trainerPage) return;
-    const header = trainerPage.querySelector('.app-header');
-    const controls = trainerPage.querySelector('.controls-bar');
-    const workspace = document.getElementById('workspace');
-    const glossary = trainerPage.querySelector('.glossary-wrap');
-    const footer = trainerPage.querySelector('.app-footer');
-    const resultScreen = document.getElementById('testResultScreen');
-    const scoreText = document.getElementById('finalScoreText');
-    const scoreDetails = document.getElementById('finalScoreDetails');
-    const maxScore = getMaxPracticeScore();
-
-    if (header) header.style.display = 'none';
-    if (controls) controls.style.display = 'none';
-    if (workspace) workspace.style.display = 'none';
-    if (glossary) glossary.style.display = 'none';
-    if (footer) footer.style.display = 'none';
-    if (resultScreen) resultScreen.style.display = 'flex';
-
-    if (scoreText) {
-        scoreText.textContent = `Вы набрали ${practiceScore.correct} из ${maxScore} баллов.`;
-    }
-    if (scoreDetails) {
-        scoreDetails.textContent = `Всего карточек в тесте: ${getFilteredLines().length}. В каждой карточке оцениваются две трансформации: Dota 2 и Dragon Blood.`;
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const tp = document.getElementById('trainerPage');
+    if (!tp) return;
+    [tp.querySelector('.app-header'), tp.querySelector('.controls-bar'),
+     document.getElementById('workspace'), tp.querySelector('.glossary-wrap'),
+     tp.querySelector('.app-footer')].forEach(e => { if(e) e.style.display='none'; });
+    const rs = document.getElementById('testResultScreen');
+    if (rs) rs.style.display = 'flex';
+    const total = getFilteredLines().length * 2;
+    const st = document.getElementById('finalScoreText');
+    const sd = document.getElementById('finalScoreDetails');
+    if (st) st.textContent = `Вы набрали ${practiceScore.correct} из ${total} баллов.`;
+    if (sd) sd.textContent = `Карточек в тесте: ${getFilteredLines().length}. В каждой — 2 трансформации: Dota 2 и Dragon Blood.`;
+    window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function goToMainFromResult() {
-    testFinished = false;
-    currentMode = 'study';
-    currentLineIndex = 0;
-    practiceAnswered = false;
-    practiceScore = { correct: 0, total: 0 };
-    resetCardQuizState();
-    resetPracticeOrder();
-    restoreTrainerInterface();
-    returnToPreview();
+    testFinished=false; currentMode='study'; currentLineIndex=0;
+    practiceScore={correct:0,total:0}; resetState();
+    practiceLineOrder=[]; practiceOrderKey='';
+    restoreUI(); returnToPreview();
 }
 
+// ═══════════════════════════════════════════════════════════
+//  ГЛОССАРИЙ
+// ═══════════════════════════════════════════════════════════
 function buildGlossary() {
     const grid = document.getElementById('glossaryGrid');
     GLOSSARY.forEach(item => {
         const card = document.createElement('div');
         card.className = 'glossary-card';
-        card.innerHTML = `
-            <div class="gcard-name">${item.name}</div>
-            <div class="gcard-desc">${item.desc}</div>
-            <div class="gcard-example">${item.example}</div>
-        `;
+        card.innerHTML = `<div class="gcard-name">${item.name}</div>
+                          <div class="gcard-desc">${item.desc}</div>
+                          <div class="gcard-example">${item.example}</div>`;
         grid.appendChild(card);
     });
 }
@@ -2490,119 +2489,75 @@ function toggleGlossary() {
     document.getElementById('glossaryToggle').classList.toggle('open', glossaryOpen);
 }
 
-function getMethodDesc(method) {
-    const found = GLOSSARY.find(g => method.startsWith(g.name.split(' (')[0]));
-    return found ? found.desc : '';
-}
-
+// ═══════════════════════════════════════════════════════════
+//  КОПИРОВАНИЕ
+// ═══════════════════════════════════════════════════════════
 function copyTranslation() {
-    const filtered = getFilteredLines();
-    const line = filtered[currentLineIndex];
+    const line = getFilteredLines()[currentLineIndex];
     if (!line) return;
     const text = `Игра: ${line.gameTranslation} (${line.gameMethod})\nСериал: ${line.seriesTranslation} (${line.seriesMethod})`;
     navigator.clipboard.writeText(text).then(() => {
         const btn = document.getElementById('copyBtn');
         btn.classList.add('copied');
-        btn.innerHTML = '<span>&#10003;</span> Скопировано';
+        btn.innerHTML = '<span>✓</span> Скопировано';
         showToast();
-        setTimeout(() => {
-            btn.classList.remove('copied');
-            btn.innerHTML = '<span>&#9112;</span> Копировать';
-        }, 2000);
-    }).catch(() => showToast('Ошибка копирования'));
+        setTimeout(()=>{ btn.classList.remove('copied'); btn.innerHTML='<span>⊞</span> Копировать'; }, 2000);
+    }).catch(()=>showToast('Ошибка копирования'));
 }
 
 function showToast(msg) {
     const t = document.getElementById('toast');
-    t.textContent = msg || 'Скопировано!';
+    t.textContent = msg||'Скопировано!';
     t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2200);
+    setTimeout(()=>t.classList.remove('show'), 2200);
 }
 
+// ═══════════════════════════════════════════════════════════
+//  КЛАВИАТУРА
+// ═══════════════════════════════════════════════════════════
 document.addEventListener('keydown', e => {
-    if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
-
-    if (currentMode === 'practice' && e.key === 'ArrowLeft') {
+    if (e.target.tagName==='SELECT'||e.target.tagName==='INPUT') return;
+    if (e.key==='ArrowLeft')  { e.preventDefault(); if(currentMode!=='practice') navigate(-1); }
+    if (e.key==='ArrowRight') {
         e.preventDefault();
-        return;
+        if (currentMode==='practice') handlePracticeNext();
+        else navigate(1);
     }
-
-    if (currentMode === 'practice' && e.key === 'ArrowRight') {
-        e.preventDefault();
-        if (studyCardAnswered.game && studyCardAnswered.series) handlePracticeNext();
-        return;
-    }
-
-    if (e.key === 'ArrowLeft') { e.preventDefault(); navigate(-1); }
-    if (e.key === 'ArrowRight') { e.preventDefault(); navigate(1); }
-    if (e.key === 'g' || e.key === 'г') toggleGlossary();
+    if (e.key==='g'||e.key==='г') toggleGlossary();
 });
 
-
-
-function openCharacterPreview() {
-    const previewPage = document.getElementById('previewPage');
-    const characterPreviewPage = document.getElementById('characterPreviewPage');
-    const trainerPage = document.getElementById('trainerPage');
-    if (previewPage) previewPage.style.display = 'none';
-    if (trainerPage) trainerPage.style.display = 'none';
-    if (characterPreviewPage) characterPreviewPage.style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+// ═══════════════════════════════════════════════════════════
+//  НАВИГАЦИЯ СТРАНИЦ (главная / персонажи / тренажёр)
+// ═══════════════════════════════════════════════════════════
+function showPage(pageId) {
+    ['previewPage','characterPreviewPage','trainerPage'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.style.display = id===pageId ? (id==='trainerPage'?'block':'block') : 'none';
+    });
+    window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function closeCharacterPreview() {
-    const previewPage = document.getElementById('previewPage');
-    const characterPreviewPage = document.getElementById('characterPreviewPage');
-    const trainerPage = document.getElementById('trainerPage');
-    if (characterPreviewPage) characterPreviewPage.style.display = 'none';
-    if (trainerPage) trainerPage.style.display = 'none';
-    if (previewPage) previewPage.style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+function openCharacterPreview() { showPage('characterPreviewPage'); }
+function closeCharacterPreview(){ showPage('previewPage'); }
+function returnToPreview()      { testFinished=false; restoreUI(); showPage('previewPage'); }
 
 function showCharacterPanel(charId) {
-    document.querySelectorAll('.character-tab-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.characterTab === charId);
-    });
-    document.querySelectorAll('.character-panel').forEach(panel => {
-        panel.classList.toggle('active', panel.dataset.characterPanel === charId);
-    });
+    document.querySelectorAll('.character-tab-btn').forEach(b => b.classList.toggle('active', b.dataset.characterTab===charId));
+    document.querySelectorAll('.character-panel').forEach(p => p.classList.toggle('active', p.dataset.characterPanel===charId));
 }
 
-function startTrainer(charId = 'all') {
-    testFinished = false;
-    restoreTrainerInterface();
-    const previewPage = document.getElementById('previewPage');
-    const characterPreviewPage = document.getElementById('characterPreviewPage');
-    const trainerPage = document.getElementById('trainerPage');
-    if (previewPage) previewPage.style.display = 'none';
-    if (characterPreviewPage) characterPreviewPage.style.display = 'none';
-    if (trainerPage) trainerPage.style.display = 'block';
-    if (charId) {
-        const selector = document.getElementById('charSelect');
-        if (selector) selector.value = charId;
-        currentChar = charId;
-        currentLineIndex = 0;
-        practiceAnswered = false;
-        resetCardQuizState();
-    }
+function startTrainer(charId='all') {
+    testFinished=false; restoreUI();
+    showPage('trainerPage');
+    const sel = document.getElementById('charSelect');
+    if (sel) sel.value = charId;
+    currentChar=charId; currentLineIndex=0; resetState();
     render();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-
-function returnToPreview() {
-    testFinished = false;
-    restoreTrainerInterface();
-    const previewPage = document.getElementById('previewPage');
-    const characterPreviewPage = document.getElementById('characterPreviewPage');
-    const trainerPage = document.getElementById('trainerPage');
-    if (trainerPage) trainerPage.style.display = 'none';
-    if (characterPreviewPage) characterPreviewPage.style.display = 'none';
-    if (previewPage) previewPage.style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
+// ═══════════════════════════════════════════════════════════
+//  ИНИЦИАЛИЗАЦИЯ
+// ═══════════════════════════════════════════════════════════
 buildGlossary();
 render();
 </script>
